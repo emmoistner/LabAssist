@@ -1,5 +1,5 @@
 <?php
-echo "<!DOCTYPE html>
+echo "<!DOCTYPE HTML5>
 <html lang='en'>
   <head>
     <meta charset='utf-8'>
@@ -19,11 +19,14 @@ echo "<!DOCTYPE html>
                                    <link rel='shortcut icon' href='ico/favicon.png'>
                                    
     -->
+
   </head>
 
   <body>
 
-
+  		<script src='dist/js/jQuery-2.0.3.js'></script>
+		
+  		 <script src='dist/js/bootstrap.js'></script>
 
     <!-- NAVBAR -->
 <nav class='navbar navbar-default' role='navigation'>
@@ -53,14 +56,27 @@ echo "<!DOCTYPE html>
 ";
 
 session_start();
-if(isset($_SESSION['userID'])){
-	$userId = $_SESSION['userId'];
+//if(isset($_SESSION['userID'])){
+	//$userId = $_SESSION['userId']; 
+//commented out for testing with no log in
+	echo "<script>function warning() {
+		var x = confirm('Are you sure you want to clock in?')
+		if(x == false) {
+			event.preventDefault();
+		}
+	}</script>";
 
-}
-else
-{
-	echo "Not logged in, cannot clock in";
-}
+
+	echo " <div class='jumbotron'><div class ='container'>
+    <a href='clockinlogic.php' class='btn btn-primary btn-lg btn-block' id='clockInButton' onclick='warning()'>Clock In</a></br>
+    <div id='alert_placeholder'></div>
+ </div></div>"; //use AJAX so you don't have to go to new page to clock in?
+
+//}
+//else
+//{
+//	echo "Not logged in, cannot clock in";
+//}
 
 echo "</body></html>";
 
