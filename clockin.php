@@ -1,5 +1,5 @@
 <?php
-echo "<!DOCTYPE HTML5>
+echo "<!DOCTYPE html>
 <html lang='en'>
   <head>
     <meta charset='utf-8'>
@@ -8,7 +8,7 @@ echo "<!DOCTYPE HTML5>
     <meta name='description' content=''>
     <meta name='author' content=''>
 
-	<link href='dist/css/bootstrap-responsive.css' rel='stylesheet'>
+  <link href='dist/css/bootstrap-responsive.css' rel='stylesheet'>
     <link href='dist/css/bootstrap.css' rel='stylesheet'>
     <link href='dist/css/bootstrap-Override.css' rel='stylesheet'>    
     <!-- Fav and touch icons 
@@ -24,9 +24,10 @@ echo "<!DOCTYPE HTML5>
 
   <body>
 
-  		<script src='dist/js/jQuery-2.0.3.js'></script>
-		
-  		 <script src='dist/js/bootstrap.js'></script>
+      <script src='dist/js/jquery-2.0.3.js'></script>
+     
+       <script src='dist/js/bootstrap.js'></script>
+       <script src='dist/js/moment.js'></script>
 
     <!-- NAVBAR -->
 <nav class='navbar navbar-default' role='navigation'>
@@ -57,28 +58,44 @@ echo "<!DOCTYPE HTML5>
 
 session_start();
 //if(isset($_SESSION['userID'])){
-	//$userId = $_SESSION['userId']; 
+  //$userId = $_SESSION['userId']; 
 //commented out for testing with no log in
-	echo "<script>function warning() {
-		var x = confirm('Are you sure you want to clock in?')
-		if(x == false) {
-			event.preventDefault();
-		}
-	}</script>";
 
+   
 
-	echo " <div class='jumbotron'><div class ='container'>
-    <a href='clockinlogic.php' class='btn btn-primary btn-lg btn-block' id='clockInButton' onclick='warning()'>Clock In</a></br>
-    <div id='alert_placeholder'></div>
- </div></div>"; //use AJAX so you don't have to go to new page to clock in?
+  echo "
+  <div class='row-fluid'>
+    <div class='span4 offset4' style='text-align:center'>
+      <div class='page-header'>
+        <h1 id='currentTime'></h1>
+      </div>
+    <div class='row-fluid'>
+      <div class='span' style='text-align:center'>
+       <a href='clockinlogic.php' class='btn btn-primary btn-lg' id='clockInButton'>Clock In</a>
+    </div>
+  </div></div></div></div>"; //use AJAX so you don't have to go to new page to clock in?
+ 
+ echo "<script>
+  var datetime = null,
+        date = null;
+
+var update = function () {
+    date = moment(new Date())
+    currentTime.html(date.format('dddd, MMMM Do YYYY, h:mm:ss a'));
+};
+
+$(document).ready(function(){
+    currentTime = $('#currentTime');
+    update();
+    setInterval(update, 1000);
+});
+  </script>";
 
 //}
 //else
 //{
-//	echo "Not logged in, cannot clock in";
+//  echo "Not logged in, cannot clock in";
 //}
 
 echo "</body></html>";
-
-
 ?>
