@@ -95,6 +95,8 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">Create A New Class List</h4>
+        <input type ="text" class="input-large" placeholder = "Class Name/Section" required="required"/>
+        <input type ="text" class="input-small" placeholder = "Instructor" required="required"/>
       </div>
       <div class="modal-body">
         <input type ="text" class="input-small" placeholder ="First Name" required="required"/>
@@ -111,6 +113,8 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+	
     
     <div id="file_info"></div>
     <div id="list"></div>
@@ -124,7 +128,7 @@
   function fileInfo(e){
     var file = e.target.files[0];
     if (file.name.split(".")[1].toUpperCase() != "CSV"){
-      alert('Invalid csv file !');
+      alert('Invalid file format');
       e.target.parentNode.reset();
       return;
     }else{
