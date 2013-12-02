@@ -11,23 +11,31 @@ echo "<!DOCTYPE html>
   <link href='dist/css/bootstrap-responsive.css' rel='stylesheet'>
     <link href='dist/css/bootstrap.css' rel='stylesheet'>
     <link href='dist/css/bootstrap-Override.css' rel='stylesheet'>    
-    <!-- Fav and touch icons 
-    <link rel='apple-touch-icon-precomposed' sizes='144x144' href='/apple-touch-icon-144-precomposed.png'>
-    <link rel='apple-touch-icon-precomposed' sizes='114x114' href='/apple-touch-icon-114-precomposed.png'>
-      <link rel='apple-touch-icon-precomposed' sizes='72x72' href='/apple-touch-icon-72-precomposed.png'>
-                    <link rel='apple-touch-icon-precomposed' href='ico/apple-touch-icon-57-precomposed.png'>
-                                   <link rel='shortcut icon' href='ico/favicon.png'>
-                                   
-    -->
 
   </head>
 
   <body>
 
       <script src='dist/js/jquery-2.0.3.js'></script>
-     
        <script src='dist/js/bootstrap.js'></script>
        <script src='dist/js/moment.js'></script>
+
+       <script>
+  var datetime = null,
+        date = null;
+
+var update = function () {
+    date = moment(new Date())
+    currentTime.html(date.format('dddd, MMMM Do YYYY, h:mm:ss a'));
+};
+
+$(document).ready(function(){
+    currentTime = $('#currentTime');
+    update();
+    setInterval(update, 1000);
+  });
+  </script>
+
 
     <!-- NAVBAR -->
 <nav class='navbar navbar-default' role='navigation'>
@@ -47,7 +55,7 @@ echo "<!DOCTYPE html>
         <input type='text' class='form-control' placeholder='Username'>
       </div>
       <div class='form-group'>
-        <input type='text' class='form-control' placeholder='Password'/ >
+        <input type='text' class='form-control' placeholder='Password' >
       </div>
       <button type='submit' class='btn btn-default'>Login</button>
     </form>
@@ -57,45 +65,51 @@ echo "<!DOCTYPE html>
 ";
 
 session_start();
-//if(isset($_SESSION['userID'])){
-  //$userId = $_SESSION['userId']; 
-//commented out for testing with no log in
+$_SESSION['userID'] = 1; //Code for testing before log in is added
+if(isset($_SESSION['userID'])){
+  $userId = $_SESSION['userID']; 
 
-   
 
-  echo "
-  <div class='row-fluid'>
+$host="tcp:hrlserver12.dhcp.bsu.edu,1433"; // Host name 
+
+$connectionInfo = array( "UID"=>"my_DBuser","PWD"=>"Password1", "Database"=>"my_DB");
+
+$link = sqlsrv_connect( $host, $connectionInfo);
+if(!$link) {
+  ('Something went wrong while connecting to MSSQL');
+}
+
+
+$query = "Select * from UsersCourses where UserID=".$userId;
+$data = sqlsrv_query($link, $query);
+
+  echo "<div class='row-fluid'>
     <div class='span4 offset4' style='text-align:center'>
       <div class='page-header'>
         <h1 id='currentTime'></h1>
+        </br><small>Select class to clock in:</small>
       </div>
     <div class='row-fluid'>
       <div class='span' style='text-align:center'>
-       <a href='clockinlogic.php' class='btn btn-primary btn-lg' id='clockInButton'>Clock In</a>
-    </div>
-  </div></div></div></div>"; //use AJAX so you don't have to go to new page to clock in?
+      <form action='clockinlogic.php' method='post' class='vertical-form'>
+        <div class='form-group'>
+        <select name='course' class='form-control'>";
+       while($results = sqlsrv_fetch_array( $data)) {
+          echo "<option>".$results['CourseID']. " Section ". $results['section'] . "</option>";
+        }
+        echo "</select>
+        </div>
+        <div class='form-group'>
+       <button type='submit' class='btn btn-primary btn-lg'>Clock In</a>
+       </div>
+       </form>
+  </div></div></div></div>";
  
- echo "<script>
-  var datetime = null,
-        date = null;
-
-var update = function () {
-    date = moment(new Date())
-    currentTime.html(date.format('dddd, MMMM Do YYYY, h:mm:ss a'));
-};
-
-$(document).ready(function(){
-    currentTime = $('#currentTime');
-    update();
-    setInterval(update, 1000);
-});
-  </script>";
-
-//}
-//else
-//{
-//  echo "Not logged in, cannot clock in";
-//}
+}
+else
+{
+  echo "Not logged in, cannot clock in";
+}
 
 echo "</body></html>";
 ?>
