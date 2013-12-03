@@ -6,21 +6,38 @@ session_start();
 if(isset($_SESSION['username'])){
 }
 
+function curPageName() 
+{
+ return substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
+}
+
+/*FIND THE CURRENT ACTIVE PAGE. When echo a navbar button don't forget to add the variable to make it active. */
+$indexActive = '';
+$clockinActive = '';
+if (curPageName() == "index.php")
+{
+	$indexActive = "class='active'";
+}
+if (curPageName() == "clockin.php")
+{
+	$clockinActive = "class='active'";
+}
 ?>
 
 <!-- NAVBAR -->
 <nav class='navbar navbar-default' role='navigation'>
   <div class='navbar-header'>
     <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-ex1-collapse'> <span class='sr-only'>Toggle 				navigation</span> <span class='icon-bar'></span> <span class='icon-bar'></span> <span class='icon-bar'></span> </button>
-    <a class='navbar-brand' href='#'>LabTrack</a> </div>
+    <a class='navbar-brand' href='index.php'>LabTrack</a> </div>
   
   <!-- Group the nav links, forms, and other content for width toggling -->
   <div class='collapse navbar-collapse navbar-ex1-collapse'>
     <ul class='nav navbar-nav'>
-      <li class='active'><a href='index.html'>Home</a></li>
-      <?PHP
+    <?PHP
+	echo "<li ".$indexActive."><a href='index.php'>Home</a></li>";
+	
     if (isset($_SESSION['Fname']))
-	 { echo "<li><a href='clockin.php'>Clock-in</a></li>";
+	 { echo "<li ".$clockinActive."><a href='clockin.php'>Clock-in</a></li>";
 	 }
 	 ?>
     </ul>
