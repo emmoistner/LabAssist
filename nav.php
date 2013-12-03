@@ -1,6 +1,7 @@
 <?php
 
-require includeJS.php;
+require "includeJS.php";
+
 
 
 /*if(session_id() == '') {
@@ -37,14 +38,14 @@ if(isset($_SESSION['isAdmin'])){
 			<!-- Group the nav links, forms, and other content for width toggling -->
 			<div class='collapse navbar-collapse navbar-ex1-collapse'>
 					<ul class='nav navbar-nav'>
-						<li class='active'><a href='#'>Home</a></li>
+						<li class='active'><a href='index.html'>Home</a></li>
+						<li><a href="clockin.php">Clock-in</a></li>	
 					</ul>
-					<form class='navbar-form navbar-right' role='Login'>
+					<form method="post" action="checklogin.php"  class='navbar-form navbar-right' role='Login'>
 						<div class='form-group'>
-							<input type='text' class='form-control' placeholder='Username'>
-						</div>
+							<input type='text' class='form-control' name="username" id="username" placeholder='Username' value="" />										</div>
 						<div class='form-group'>
-							<input type='text' class='form-control' placeholder='Password'/ >
+							<input type='password' class='form-control' name="password" id="password" placeholder='Password'value="" />
 						</div>
 						<button type='submit' class='btn btn-default'>Login</button>
 					</form>
