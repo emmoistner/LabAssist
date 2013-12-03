@@ -6,36 +6,36 @@ require('connect.php');
 $myusername=$_POST['username']; 
 $mypassword=$_POST['password']; 
 
-$myusername = stripslashes($myusername);
+/*$myusername = stripslashes($myusername);
 $mypassword = stripslashes($mypassword);
-$
-$myusername = mysql_real_escape_string($myusername);
-$mypassword = mysql_real_escape_string($mypassword);
-$myusername = strtolower($myusername);
-$E_mail = "$myusername@bsu.edu";
+$myusername = strtolower($myusername);*/
+$E_mail = $myusername. "@bsu.edu";
 //$mypassword = sha1($mypassword);
-$sql="SELECT * FROM CapstoneUsers WHERE BSUEmail='$E_mail' and Pass='$mypassword'";
+$sql="SELECT BSUEmail, Pass, Fname, Lname, ID FROM CapstoneUsers WHERE BSUEmail=? and Pass=?";
+$params = array($E_mail, $mypassword);
 
-$result=mysql_query($sql);
+$data = sqlsrv_query($link, $sql, $params, array("Scrollable"=>"buffered"));
+if( $data === false){
+	die( print_r(sqlsrv_errors(), true));
+}
 
-$count=mysql_num_rows($result);
+$count=sqlsrv_num_rows($data);
+
 
 
 if($count==1){
-	$row=mysql_fetch_array($result);
-	session_register("myusername");
-	session_register("mypassword");
-	$_SESSION['Fname'] = $row['Fname']; 
-	$_SESSION['Lname'] = $row['Lname']; 
+	header("location:login_success.php");
+	$row = sqlsrv_fetch_array($data, SQLSRV_FETCH_NUMERIC);
+	session_start();
+	$_SESSION['Fname'] = $row[2]; 
+	$_SESSION['Lname'] = $row[3]; 
 	//$_SESSION['PositionID'] = $row['PositionID'];
-	$_SESSION['ID'] = $row['ID'];
-	header("location:index.html");
-} else {
-?>
-<script type="text/javascript">
-	alert("Wrong Username or Password");
-	history.back();
-</script>
-<?php
-}
+	$_SESSION['ID'] = $row[4];
+/* Redirect to a different page in the current directory that was requested */
+	$host  = $_SERVER['HTTP_HOST'];
+	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+	$extra = 'login_success.php';
+	sqlsrv_close($link);
+	exit;
+} else {}
 ?>
