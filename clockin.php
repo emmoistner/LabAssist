@@ -57,15 +57,7 @@ if(isset($_SESSION['Fname'])){
   $userId = $_SESSION['ID']; 
 
 
-$host="tcp:hrlserver12.dhcp.bsu.edu,1433"; // Host name 
-
-$connectionInfo = array( "UID"=>"my_DBuser","PWD"=>"Password1", "Database"=>"my_DB");
-
-$link = sqlsrv_connect( $host, $connectionInfo);
-if(!$link) {
-  die('Something went wrong while connecting to MSSQL');
-}
-
+require('connect.php');
 
 $query = "Select CourseID from UsersCourses where UserID=" . $userId;
 $data = sqlsrv_query($link, $query);
