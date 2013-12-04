@@ -24,7 +24,6 @@ require ('includeJS.php');
 
   <body>
 
-      <script src='includeJS.js'></script>
 
 
   <script>
@@ -59,8 +58,7 @@ if(isset($_SESSION['Fname'])){
 
 require('connect.php');
 
-$query = "Select CourseID from UsersCourses where UserID=" . $userId;
-$data = sqlsrv_query($link, $query);
+
 
   echo "<div class='row-fluid'>
     <div class='span4 offset4' style='text-align:center'>
@@ -72,12 +70,50 @@ $data = sqlsrv_query($link, $query);
       <form action='clockinlogic.php' method='post' class='vertical-form'>
         <div class='form-group'>
         <select data-placeholder='Choose classes to clock in for...' multiple id='course' name='courses[]'>";
+
+        $query = "Select CourseID from UsersCourses where UserID=" . $userId;
+        $data = sqlsrv_query($link, $query);
+        $enable = TRUE;
        while($results = sqlsrv_fetch_array( $data)) {
           $courseID = $results['CourseID'];
-          $secondQuery = "select name from courses where courseID =" . $courseID;
+          $secondQuery = "select name, section from courses where courseID =" . $courseID;
+
+
           $returned = sqlsrv_query($link, $secondQuery);
           $answers = sqlsrv_fetch_array($returned);
-          echo "<option>".$answers['name']."</option>";
+
+
+
+
+
+          $timeClockSql = "Select CourseID from TimeClock where UserID =" . $userId . " AND TimeOut IS NULL";
+          $timeClockResults = sqlsrv_query($link, $timeClockSql);
+          while($timeClockArray = sqlsrv_fetch_array($timeClockResults)) {
+
+
+                if($timeClockArray['CourseID'] == $courseID) {
+                    $enable = FALSE;
+                    break;
+            
+                } 
+                else 
+                {
+                    $enable = TRUE;
+              
+                }
+             
+          }
+        
+
+
+
+
+            if($enable) {
+              echo "<option>".$answers['name']. " Section ". $answers['section'] . "</option>";
+            }
+            else {
+              echo "<option disabled='true'>".$answers['name']. " Section ". $answers['section'] . "</option>";
+            }
         }
         echo "</select>
         </div>
