@@ -29,6 +29,8 @@ if(isset($_SESSION['Fname']) && isset($_POST['courses'])){
     $courseID = $courseIDArray['courseID'];
     $clockInSql = "Insert into TimeClock (UserID, IP, TimeIn, CourseID) values(". $userID. ", '".$ip. "', CURRENT_TIMESTAMP, ". $courseID . ")";
     sqlsrv_query($link, $clockInSql);
+    $activeSql = "Update CapstoneUsers set active =1 where ID=" . $userID;
+    sqlsrv_query($link, $activeSql);
   }
 }
 else {
