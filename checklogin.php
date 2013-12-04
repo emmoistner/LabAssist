@@ -11,7 +11,7 @@ $mypassword = stripslashes($mypassword);
 $myusername = strtolower($myusername);*/
 $E_mail = $myusername. "@bsu.edu";
 //$mypassword = sha1($mypassword);
-$sql="SELECT BSUEmail, Pass, Fname, Lname, ID FROM CapstoneUsers WHERE BSUEmail=? and Pass=?";
+$sql="SELECT BSUEmail, Pass, Fname, Lname, ID, Active FROM CapstoneUsers WHERE BSUEmail=? and Pass=?";
 $params = array($E_mail, $mypassword);
 
 $data = sqlsrv_query($link, $sql, $params, array("Scrollable"=>"buffered"));
@@ -31,6 +31,7 @@ if($count==1){
 	$_SESSION['Lname'] = $row[3]; 
 	//$_SESSION['PositionID'] = $row['PositionID'];
 	$_SESSION['ID'] = $row[4];
+	$_SESSION['active'] = $row[5];
 /* Redirect to a different page in the current directory that was requested */
 	$host  = $_SERVER['HTTP_HOST'];
 	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
