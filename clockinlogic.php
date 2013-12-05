@@ -1,39 +1,40 @@
 
-<!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset='utf-8'>
-    <title>LabTrack</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <meta name='description' content=''>
-    <meta name='author' content=''>
-
-  <link href='dist/css/bootstrap-responsive.css' rel='stylesheet'>
-    <link href='dist/css/bootstrap.css' rel='stylesheet'>
-    <link href='dist/css/bootstrap-Override.css' rel='stylesheet'>    
-
-  </head>
-
-  <body>
-
-      <script src='dist/js/jquery-2.0.3.js'></script>
-       <script src='dist/js/bootstrap.js'></script>
-       <script src='dist/js/moment.js'></script>
     
 
 <?php
 session_start();
 
-if(isset($_SESSION['Fname'])){
+require('connect.php');
+
+
+if(isset($_SESSION['Fname']) && isset($_POST['courses'])){
+  header("location:index.php");
+
   $courses = $_POST['courses'];
+  $_SESSION['active'] = true;
+
+
+  $ip = $_SERVER['REMOTE_ADDR'];
+  $userID = $_SESSION['ID'];
+
+
+
   foreach ($courses as $course) {
-    echo $course;
-  }
+    $className = substr($course, 0, 7);
+    $section = substr($course, 16);
 
-
+    $courseIDSql = "Select courseID from Courses where name ='" . $className . "' and section =" . $section;
+    $courseIDResult = sqlsrv_query($link, $courseIDSql);
+    $courseIDArray = sqlsrv_fetch_array($courseIDResult);
+    $courseID = $courseIDArray['courseID'];
+    $clockInSql = "Insert into TimeClock (UserID, IP, TimeIn, CourseID) values(". $userID. ", '".$ip. "', CURRENT_TIMESTAMP, ". $courseID . ")";
+    sqlsrv_query($link, $clockInSql);
+    $activeSql = "Update CapstoneUsers set active =1 where ID=" . $userID;
+    sqlsrv_query($link, $activeSql);
   }
-else
-  echo "Please log in";
+}
+else {
+  header("location:index.php");
+}
   ?>
 
-</body></html>

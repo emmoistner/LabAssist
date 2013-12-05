@@ -52,7 +52,7 @@ $(document).ready(function(){
 
 <?php
 session_start();
-if(isset($_SESSION['Fname'])){
+if(isset($_SESSION['Fname']) && $_SESSION['active']){
   $userId = $_SESSION['ID']; 
 
 
@@ -67,11 +67,11 @@ require('connect.php');
       </div>
     <div class='row-fluid'>
       <div class='span' style='text-align:center'>
-      <form action='clockinlogic.php' method='post' class='vertical-form'>
+      <form action='clockoutlogic.php' method='post' class='vertical-form'>
         <div class='form-group'>
-        <select data-placeholder='Choose classes to clock in for...' multiple id='course' name='courses[]'>";
+        <select data-placeholder='Choose classes to clock out of...' multiple id='course' name='courses[]'>";
 
-        $query = "Select CourseID from UsersCourses where UserID=" . $userId;
+        $query = "Select CourseID from TimeClock where UserID =" . $userId . " AND TimeOut IS NULL";
         $data = sqlsrv_query($link, $query);
         $enable = TRUE;
        while($results = sqlsrv_fetch_array( $data)) {
@@ -83,42 +83,13 @@ require('connect.php');
           $answers = sqlsrv_fetch_array($returned);
 
 
-
-
-
-          $timeClockSql = "Select CourseID from TimeClock where UserID =" . $userId . " AND TimeOut IS NULL";
-          $timeClockResults = sqlsrv_query($link, $timeClockSql);
-          while($timeClockArray = sqlsrv_fetch_array($timeClockResults)) {
-
-
-                if($timeClockArray['CourseID'] == $courseID) {
-                    $enable = FALSE;
-                    break;
-            
-                } 
-                else 
-                {
-                    $enable = TRUE;
-              
-                }
-             
-          }
-        
-
-
-
-
-            if($enable) {
               echo "<option>".$answers['name']. " Section ". $answers['section'] . "</option>";
-            }
-            else {
-              echo "<option disabled='true'>".$answers['name']. " Section ". $answers['section'] . "</option>";
-            }
+ 
         }
         echo "</select>
         </div>
         <div class='form-group'>
-       <button type='submit' class='btn btn-primary btn-lg'>Clock In</a>
+       <button type='submit' class='btn btn-primary btn-lg'>Clock Out</a>
        </div>
        </form>
   </div></div></div></div>";
@@ -126,7 +97,7 @@ require('connect.php');
 }
 else
 {
-  echo "Not logged in, cannot clock in";
+  echo "Not logged in or not clocked into any class, cannot clock out";
 }
 
 echo "</body></html>";
