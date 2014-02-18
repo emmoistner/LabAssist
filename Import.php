@@ -159,6 +159,18 @@
    
    <?php
    
+   $con = mysqli_connect(/*domain of database, username, password,  name of database*/);
+   if (mysqli_connect_errno()){
+   echo "Failure to connect to database";
+   
+   }
+   $result = mysqli_query($con, "SELECT * FROM ");
+   
+   while($row = mysqli_fetch_array($result)){
+	echo $row['Class Name'].$row['Instructor'];   
+   
+   }
+   
    
    
    ?>
@@ -169,6 +181,9 @@
    <script>$('#error').hide();</script>
     
    <script type ="text/javascript">
+   
+   
+   
    function fileInfo(e){
     var file = e.target.files[0];
     if (file.name.split(".")[1].toUpperCase() != "CSV"){
