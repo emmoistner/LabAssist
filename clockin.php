@@ -51,10 +51,9 @@ $(document).ready(function(){
     ?>
 
 <?php
-session_start();
+
 if(isset($_SESSION['Fname'])){
   $userId = $_SESSION['ID']; 
-
 
 require('connect.php');
 
@@ -71,24 +70,27 @@ require('connect.php');
         <div class='form-group'>
         <select data-placeholder='Choose classes to clock in for...' multiple id='course' name='courses[]'>";
 
-        $query = "Select CourseID from UsersCourses where UserID=" . $userId;
-        $data = sqlsrv_query($link, $query);
+        $query = "Select CourseID from UserCourses where UserID=" . $userId;
+        $data = mysql_query($query, $link);
         $enable = TRUE;
-       while($results = sqlsrv_fetch_array( $data)) {
+       while($results = mysql_fetch_array($data, MYSQL_ASSOC)) {
           $courseID = $results['CourseID'];
+     
           $secondQuery = "select name, section from courses where courseID =" . $courseID;
 
 
-          $returned = sqlsrv_query($link, $secondQuery);
-          $answers = sqlsrv_fetch_array($returned);
+          $returned = mysql_query($secondQuery, $link);
+          $answers = mysql_fetch_array($returned, MYSQL_ASSOC);
+
+
 
 
 
 
 
           $timeClockSql = "Select CourseID from TimeClock where UserID =" . $userId . " AND TimeOut IS NULL";
-          $timeClockResults = sqlsrv_query($link, $timeClockSql);
-          while($timeClockArray = sqlsrv_fetch_array($timeClockResults)) {
+          $timeClockResults = mysql_query($timeClockSql, $link);
+          while($timeClockArray = mysql_fetch_array($timeClockResults, MYSQL_ASSOC)) {
 
 
                 if($timeClockArray['CourseID'] == $courseID) {
