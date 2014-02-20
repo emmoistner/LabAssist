@@ -34,7 +34,6 @@ require "nav.php";
 ?>
 
 <?php
-session_start();
 if(isset($_SESSION['Fname'])){
   $userId = $_SESSION['ID']; 
 
@@ -57,7 +56,7 @@ echo " <table class='table table-striped table-bordered'>
 
 
 $query = "Select StampID, UserID, IP, TimeIn, TimeOut, CourseID FROM TimeClock";
-$data = mysql_query($link, $query);
+$data = mysql_query($query, $link);
 while($results = mysql_fetch_array($data)) {
   $stampID = $results[0];
   $userID = $results[1];
