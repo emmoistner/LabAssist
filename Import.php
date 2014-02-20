@@ -125,18 +125,20 @@
        <div class="modal-header"> 
          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> 
          <h4 class="modal-title" id="myModalLabel">Create the Class</h4> 
-         <input type ="text" class="input-small" placeholder = "Class Name" required="required"/> 
-         <input type ="text" class="input-small" placeholder = "Instructor" required="required"/> 
-         <input type ="text" class="input-small" placeholder = "Section" required="required"/> 
+         <form action ="importClasses.php" method="post">
+         <input type ="text" class="input-small" placeholder = "Class Name" name ="classname" required="required"/> 
+         <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor" required="required"/> 
+         <input type ="text" class="input-small" placeholder = "Section" name ="section" required="required"/> 
          </br>
-         </br>
-         <input type ="text" class="input-small" placeholder = "Course ID" required="required"/> 
-         <input type ="text" class="input-small" placeholder = "Room Number" required="required"/> 
+         </br> 
+         <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum" required="required"/> 
+         
        </div> 
        
        <div class="modal-footer"> 
          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-         <button type="button" class="btn btn-primary" onclick="handleFileSelect()" data-dismiss="modal">Create</button> 
+         <button type="submit" class="btn btn-primary" onclick="handleFileSelect()" data-dismiss="modal">Create</button> 
+         </form>
        </div> 
      </div><!-- /.modal-content --> 
    </div><!-- /.modal-dialog --> 
@@ -156,24 +158,71 @@
      
      
    </div> 
-   
+
+   <table>
+
    <?php
-   
-   $con = mysqli_connect(/*domain of database, username, password,  name of database*/);
-   if (mysqli_connect_errno()){
-   echo "Failure to connect to database";
-   
+
+
+   $con = mysql_connect('localhost', 'root', '');
+  if (!$con)
+  {
+    die('Not connected : ' . mysql_error());
+  }
+  /*LabTrack is just the name of my db, we'll use the server one*/
+  $db = mysql_select_db('LabTrack', $con);
+if (!$db)
+  {
+    die ('Cannot find database : ' . mysql_error());
+  }
+
+   $sql="SELECT * FROM Courses";
+
+   $sql2="SELECT * FROM UserCourses ORDER BY CourseID";
+
+   $data=mysql_query($sql);
+
+   $data2=mysql_query($sql2);
+
+   if(!$data){
+
+    die('Invalid Query: ' . mysql_error());
+
    }
-   $result = mysqli_query($con, "SELECT * FROM ");
+
    
-   while($row = mysqli_fetch_array($result)){
-	echo $row['Class Name'].$row['Instructor'];   
-   
+
+   while($courses = mysql_fetch_array($data)){
+
+    ?>
+    
+      <th><?php echo $courses['name']; ?> Course ID: <?php echo $courses['CourseID']; ?> Section: <?php echo $courses['section']; ?> Instructor ID: 
+        <?php echo $courses['InstructorID']; ?> Room: <?php echo $courses['Room']; ?> </th>
+
+        <?php
+
+          while($students = mysql_fetch_array($data2)){
+    
+            ?>
+    <tr><td><?php echo $students['UserID']; ?> <?php echo $students['CourseID']; ?></td></tr>
+<?php
+ }
+ 
+      
+
+    
+
+
+  
    }
-   
-   
-   
    ?>
+
+
+ </table>
+
+   
+   
+  
    
    <script src = "dist/js/jquery-2.0.3.js"></script> 
    <script src = "dist/js/bootstrap.min.js"></script> 
@@ -181,9 +230,6 @@
    <script>$('#error').hide();</script>
     
    <script type ="text/javascript">
-   
-   
-   
    function fileInfo(e){
     var file = e.target.files[0];
     if (file.name.split(".")[1].toUpperCase() != "CSV"){
