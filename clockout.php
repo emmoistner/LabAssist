@@ -51,7 +51,7 @@ $(document).ready(function(){
     ?>
 
 <?php
-session_start();
+
 if(isset($_SESSION['Fname']) && $_SESSION['active']){
   $userId = $_SESSION['ID']; 
 
@@ -72,15 +72,15 @@ require('connect.php');
         <select data-placeholder='Choose classes to clock out of...' multiple id='course' name='courses[]'>";
 
         $query = "Select CourseID from TimeClock where UserID =" . $userId . " AND TimeOut IS NULL";
-        $data = sqlsrv_query($link, $query);
+        $data = mysql_query($query, $link);
         $enable = TRUE;
-       while($results = sqlsrv_fetch_array( $data)) {
+       while($results = mysql_fetch_array( $data, MYSQL_ASSOC)) {
           $courseID = $results['CourseID'];
           $secondQuery = "select name, section from courses where courseID =" . $courseID;
 
 
-          $returned = sqlsrv_query($link, $secondQuery);
-          $answers = sqlsrv_fetch_array($returned);
+          $returned = mysql_query($secondQuery, $link);
+          $answers = mysql_fetch_array($returned, MYSQL_ASSOC);
 
 
               echo "<option>".$answers['name']. " Section ". $answers['section'] . "</option>";

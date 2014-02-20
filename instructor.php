@@ -57,8 +57,8 @@ echo " <table class='table table-striped table-bordered'>
 
 
 $query = "Select StampID, UserID, IP, TimeIn, TimeOut, CourseID FROM TimeClock";
-$data = sqlsrv_query($link, $query);
-while($results = sqlsrv_fetch_array($data)) {
+$data = mysql_query($link, $query);
+while($results = mysql_fetch_array($data)) {
   $stampID = $results[0];
   $userID = $results[1];
   $ip = $results[2];

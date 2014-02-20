@@ -2,8 +2,8 @@
     
 
 <?php
-session_start();
 
+session_start();
 require('connect.php');
 
 
@@ -24,13 +24,13 @@ if(isset($_SESSION['Fname']) && isset($_POST['courses'])){
     $section = substr($course, 16);
 
     $courseIDSql = "Select courseID from Courses where name ='" . $className . "' and section =" . $section;
-    $courseIDResult = sqlsrv_query($link, $courseIDSql);
-    $courseIDArray = sqlsrv_fetch_array($courseIDResult);
+    $courseIDResult = mysql_query($courseIDSql, $link);
+    $courseIDArray = mysql_fetch_array($courseIDResult, MYSQL_ASSOC);
     $courseID = $courseIDArray['courseID'];
     $clockInSql = "Insert into TimeClock (UserID, IP, TimeIn, CourseID) values(". $userID. ", '".$ip. "', CURRENT_TIMESTAMP, ". $courseID . ")";
-    sqlsrv_query($link, $clockInSql);
+    mysql_query($clockInSql, $link);
     $activeSql = "Update CapstoneUsers set active =1 where ID=" . $userID;
-    sqlsrv_query($link, $activeSql);
+    mysql_query($activeSql, $link);
   }
 }
 else {
