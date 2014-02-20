@@ -35,7 +35,7 @@ if(isset($_SESSION['Fname']) && isset($_POST['courses']) && $_SESSION['active'])
     if(!$activeArray) {
       $_SESSION['active'] = FALSE;
       $deactiveSql = "Update CapstoneUsers set active=0 where ID=" . $userID;
-      sqlsrv_query($deactiveSql, $link);
+      mysql_query($deactiveSql, $link);
     }
 
 }
