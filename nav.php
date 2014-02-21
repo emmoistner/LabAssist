@@ -16,9 +16,15 @@ $indexActive = '';
 $clockinActive = '';
 $clockoutActive = '';
 $importActive = '';
+$accountActive = '';
+
 if (curPageName() == "index.php")
 {
 	$indexActive = "class='active'";
+}
+if (curPageName() == "account.php")
+{
+	$accountActive = "class='active'";
 }
 if (curPageName() == "clockin.php")
 {
@@ -51,6 +57,7 @@ if (curPageName() == "Import.php")
 	 { 
 	 	echo "<li ".$clockinActive."><a href='clockin.php'>Clock-in</a></li>";
 	 	echo "<li ".$importActive."><a href ='Import.php'>Classes</a></li>";
+		echo "<li ".$accountActive."><a href ='account.php'>Account</a></li>";
 		
     if($_SESSION['active'])
     {
