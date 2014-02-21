@@ -70,7 +70,7 @@
  
  <?php
  
- require ('connect.php');
+ 
  require ('nav.php');
  require ('includeJS.php');
  ?>
@@ -93,28 +93,32 @@
        <div class="modal-header"> 
          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> 
          <h4 class="modal-title" id="myModalLabel">Create A New Class List</h4> 
-         <input type ="text" class="input-small" placeholder = "Class Name" required="required"/> 
-         <input type ="text" class="input-small" placeholder = "Instructor" required="required"/> 
-         <input type ="text" class="input-small" placeholder = "Section" required="required"/> 
+         <form action = "importClassList.php" method="post">
+         <input type ="text" class="input-small" placeholder = "Class Name" name ="classname" required="true"/> 
+         <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor"required/> 
+         <input type ="text" class="input-small" placeholder = "Section" name="section" required/> 
+         <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum" required/>  
          </br>
-         </br>
-         <input type ="text" class="input-small" placeholder = "Course ID" required="required"/> 
-         <input type ="text" class="input-small" placeholder = "Room Number" required="required"/> 
-       </div> 
-       <div class="modal-body"> 
-         <input type ="text" class="input-small" placeholder ="First Name" required="required"/> 
-         <input type ="text" class="input-small" placeholder ="Last Name" required="required"/> 
-         <input type ="text" class="input-small" placeholder ="User Name" required ="required"/> 
+         </br> 
+         <input type ="text" class="input-small" placeholder ="First Name" name = "Fname" id="fname" required="required"/> 
+         <input type ="text" class="input-small" placeholder ="Last Name" name = "Lname" required="required"/> 
+         <input type ="text" class="input-small" placeholder ="User Name" name = "BSUemail" required ="required"/> 
+         <input type ="text" class="input-small" placeholder ="Student ID" name= "UserID" required/>
          </br>
          </br>
          <button type ="button" class = "btn btn-sm btn-primary" onclick="addRow()">Add</button> 
-         <button type ="button" class = "btn btn-sm btn-primary deleteRow">Delete</button>  
+         <button type ="button" class = "btn btn-sm btn-primary deleteRow">Delete</button> 
+         <input type = "submit" name="submit" class = "btn btn-primary"/> 
+         </form> 
+       
           
        </div> 
        <div class="modal-footer"> 
          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-         <button type="button" class="btn btn-primary">Create</button> 
-       </div> 
+         <input type="submit" class="btn btn-primary" data-dismiss="modal"></input> 
+       
+       </div>
+     
      </div><!-- /.modal-content --> 
    </div><!-- /.modal-dialog --> 
  </div><!-- /.modal --> 
@@ -159,70 +163,25 @@
      
    </div> 
 
-   <table>
+   
 
    <?php
 
 
-   $con = mysql_connect('localhost', 'root', '');
+   $con = mysql_connect('localhost', 'root', 'root');
   if (!$con)
   {
     die('Not connected : ' . mysql_error());
   }
-  /*LabTrack is just the name of my db, we'll use the server one*/
+
   $db = mysql_select_db('LabTrack', $con);
 if (!$db)
   {
     die ('Cannot find database : ' . mysql_error());
   }
 
-   $sql="SELECT * FROM Courses";
+  ?>
 
-   $sql2="SELECT * FROM UserCourses ORDER BY CourseID";
-
-   $data=mysql_query($sql);
-
-   $data2=mysql_query($sql2);
-
-   if(!$data){
-
-    die('Invalid Query: ' . mysql_error());
-
-   }
-
-   
-
-   while($courses = mysql_fetch_array($data)){
-
-    ?>
-    
-      <th><?php echo $courses['name']; ?> Course ID: <?php echo $courses['CourseID']; ?> Section: <?php echo $courses['section']; ?> Instructor ID: 
-        <?php echo $courses['InstructorID']; ?> Room: <?php echo $courses['Room']; ?> </th>
-
-        <?php
-
-          while($students = mysql_fetch_array($data2)){
-    
-            ?>
-    <tr><td><?php echo $students['UserID']; ?> <?php echo $students['CourseID']; ?></td></tr>
-<?php
- }
- 
-      
-
-    
-
-
-  
-   }
-   ?>
-
-
- </table>
-
-   
-   
-  
    
    <script src = "dist/js/jquery-2.0.3.js"></script> 
    <script src = "dist/js/bootstrap.min.js"></script> 
@@ -254,7 +213,7 @@ if (!$db)
                 var tr = document.createElement('tr');
                 var arr = rows[i].split(',');
 
-                for (var j = 0; j < arr.length; j++){
+                for (var j = 0; j < arr.length-2; j++){
                   if (i==0)
                     var td = document.createElement('th');
                   else
@@ -288,7 +247,7 @@ if (!$db)
    
   
   function addRow(){ 
-  var lastGroup = $('.modal-body').last(); 
+  var lastGroup = $('.modal-header .fname').last(); 
   lastGroup.clone().insertAfter(lastGroup); 
   return false; 
   } 
