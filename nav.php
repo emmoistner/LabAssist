@@ -17,6 +17,9 @@ $clockinActive = '';
 $clockoutActive = '';
 $importActive = '';
 $accountActive = '';
+$dashboardActive = '';
+$settingsActive = '';
+$accountdropdownActive ='';
 
 if (curPageName() == "index.php")
 {
@@ -26,6 +29,14 @@ if (curPageName() == "account.php")
 {
 	$accountActive = "class='active'";
 }
+if (curPageName() == "dashboard.php")
+{
+	$dashboardActive = "class='active'";
+}
+if (curPageName() == "settings.php")
+{
+	$settingsActive = "class='active'";
+}
 if (curPageName() == "clockin.php")
 {
 	$clockinActive = "class='active'";
@@ -34,13 +45,15 @@ if (curPageName() == "clockout.php")
 {
   $clockoutActive = "class='active'";
 }
-
 if (curPageName() == "Import.php")
 {
   $importActive = "class='active'";
 }
+if ($accountActive || $dashboardActive || $settingsActive == "class='active'")
+{
+	$accountdropdownActive = " active";
+}
 ?>
-
 <!-- NAVBAR -->
 <nav class='navbar navbar-default' role='navigation'>
   <div class='navbar-header'>
@@ -57,8 +70,18 @@ if (curPageName() == "Import.php")
 	 { 
 	 	echo "<li ".$clockinActive."><a href='clockin.php'>Clock-in</a></li>";
 	 	echo "<li ".$importActive."><a href ='Import.php'>Classes</a></li>";
-		echo "<li ".$accountActive."><a href ='account.php'>Account</a></li>";
-		
+		?>
+		<li class="dropdown<?php echo "$accountdropdownActive"; ?>">
+        	<a href ="toggleDropdown()"  class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+        	<ul class="dropdown-menu" role="menu">
+            <?PHP
+				echo "<li ".$dashboardActive."><a href='dashboard.php'>Dashboard</a></li>";
+				echo "<li ".$accountActive."><a href='account.php'>My Account</a></li>";
+				echo "<li ".$settingsActive."><a href='settings.php'>Settings</a></li>";
+			?>
+			</ul> 
+        </li>
+		<?PHP
     if($_SESSION['active'])
     {
       echo "<li ".$clockoutActive."><a href='clockout.php'>Clock-out</a></li>";
@@ -85,5 +108,8 @@ if (curPageName() == "Import.php")
     </form>";
   }
  ?>
+ <script> 
+ $(document).ready(function () { $('.dropdown-toggle').dropdown(); }) //Makes the dropdown menu work. Stupid bootstrap...
+ </script>
   </div>
 </nav>

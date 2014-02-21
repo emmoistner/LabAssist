@@ -114,7 +114,7 @@ require "nav.php";
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="dist/js/jquery-2.0.3.js"></script>
 	<script src="dist/js/bootstrap.js"></script>
-    <script>
+    <script>		
       !function ($) {
         $(function(){
           // carousel 
