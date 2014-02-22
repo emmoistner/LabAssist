@@ -213,4 +213,8 @@
         line-height: 1.5;
       }
 
-    
+     /* OL Breadcrumb Responsive Look
+    -------------------------------------------------- */   
+	.breadcrumb {
+		display:inline-block;
+	}
