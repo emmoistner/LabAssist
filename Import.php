@@ -76,78 +76,72 @@
  ?>
  <body> 
   
-   <div id="wrap"> 
+   <div id="wrap">
      <h1>Classes</h1> 
-    <form action="javascript:void(0);" id="the_form"> 
+ 
         
        </br> 
        </br> 
        <button id ="popover" type ="button" class = "btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal2" >Import Class List</button> 
-       <button type ="button" class ="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">Create a Class List</button> 
-       <input type="file" id="the_file" required="required" accept=".csv" class="filestyle" data-classButton="btn btn-primary" data-buttonText="Choose a File to Import" /> 
+   
         
-       </form> 
- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
-   <div class="modal-dialog"> 
-     <div class="modal-content"> 
+
+ 
+       <form action="importClassList.php"method="post">
        <div class="modal-header"> 
          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> 
          <h4 class="modal-title" id="myModalLabel">Create A New Class List</h4> 
-         <form action = "importClassList.php" method="post">
-         <input type ="text" class="input-small" placeholder = "Class Name" name ="classname" required="true"/> 
-         <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor"required/> 
-         <input type ="text" class="input-small" placeholder = "Section" name="section" required/> 
-         <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum" required/>  
+         <input type ="text" class="input-small" placeholder = "Class Name" name ="classname" id="classname"required="true"/> 
+         <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor" id="instructor"required/> 
+         <input type ="text" class="input-small" placeholder = "Section" name="section" id="section" required/> 
+         <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum" id="roomnum" required/>  
          </br>
-         </br> 
-         <input type ="text" class="input-small" placeholder ="First Name" name = "Fname" id="fname" required="required"/> 
-         <input type ="text" class="input-small" placeholder ="Last Name" name = "Lname" required="required"/> 
-         <input type ="text" class="input-small" placeholder ="User Name" name = "BSUemail" required ="required"/> 
-         <input type ="text" class="input-small" placeholder ="Student ID" name= "UserID" required/>
-         </br>
-         </br>
-         <button type ="button" class = "btn btn-sm btn-primary" onclick="addRow()">Add</button> 
-         <button type ="button" class = "btn btn-sm btn-primary deleteRow">Delete</button> 
-         <input type = "submit" name="submit" class = "btn btn-primary"/> 
-         </form> 
-       
-          
-       </div> 
-       <div class="modal-footer"> 
-         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-         <input type="submit" class="btn btn-primary" data-dismiss="modal"></input> 
-       
        </div>
-     
-     </div><!-- /.modal-content --> 
-   </div><!-- /.modal-dialog --> 
- </div><!-- /.modal --> 
+         <div class="modal-body" id="d1">
+         <input type ="text" class="input-small" placeholder = "First Name" name = "Fname" id="fname" required="required"/> 
+         <input type ="text" class="input-small" placeholder = "Last Name" name = "Lname" id="lname" required="required"/> 
+         <input type ="text" class="input-small" placeholder = "User Name" name = "BSUemail" id="email"required ="required"/> 
+         <input type ="text" class="input-small" placeholder = "Student ID" name= "UserID" id="userid"required/>
+         </br>
+         </br>
+       </div>
+         <button type ="button" class = "btn btn-sm btn-primary" id="add" onclick="addRow()">Add</button> 
+         <button type ="button" class = "btn btn-sm btn-primary" onclick="removeRow()">Delete</button> 
+       </br>
+        </br>
+        <div class ="modal-footer">
+         <input type = "submit" name="submit" class = "btn btn-primary" data-dismiss="modal"></input> 
+       </div>
+     </form>
+
  
- <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
-   <div class="modal-dialog"> 
-     <div class="modal-content"> 
+
+
        <div class="modal-header"> 
          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> 
          <h4 class="modal-title" id="myModalLabel">Create the Class</h4> 
-         <form action ="importClasses.php" method="post">
-         <input type ="text" class="input-small" placeholder = "Class Name" name ="classname" required="required"/> 
-         <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor" required="required"/> 
-         <input type ="text" class="input-small" placeholder = "Section" name ="section" required="required"/> 
+         </div>
+          <form action ="TrueImport.php" method="post"> 
+         <input type ="text" class="input-small" placeholder = "Class Name" name ="classname2" required="required"/> 
+         <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor2" required="required"/> 
+         <input type ="text" class="input-small" placeholder = "Section" name ="section2" required="required"/> 
          </br>
          </br> 
-         <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum" required="required"/> 
+         <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum2" required="required"/> 
+         
+       
+       
+       <div class ="modal-bodynew">
+ 
+        </br>
+       <input type="file" id="the_file" required="required" accept=".csv" class="filestyle" data-classButton="btn btn-primary" data-buttonText="Choose a File to Import" name="the_file" /> 
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+         <button type="submit" class="btn btn-primary" data-dismiss="modal">Create</button> 
          
        </div> 
-       
-       <div class="modal-footer"> 
-         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
-         <button type="submit" class="btn btn-primary" onclick="handleFileSelect()" data-dismiss="modal">Create</button> 
-         </form>
-       </div> 
-     </div><!-- /.modal-content --> 
-   </div><!-- /.modal-dialog --> 
- </div><!-- /.modal --> 
-  
+       </form> 
+ 
+ 
   
   
      <div id="file_info"></div> 
@@ -155,13 +149,13 @@
      <div id ="error" class="alert alert-warning alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
   <strong>Warning!</strong> File extension must be .CSV!
-</div>
+
      
 
 
      
      
-   </div> 
+   
 
    
 
@@ -245,16 +239,57 @@ if (!$db)
 
   
    
+
+
+
+
+function addRow(){
+
+
+
   
-  function addRow(){ 
-  var lastGroup = $('.modal-header .fname').last(); 
-  lastGroup.clone().insertAfter(lastGroup); 
-  return false; 
-  } 
+   var lastGroup = $('.modal-body').last();
+   var clone = lastGroup.clone();
+   $('.modal-body').after(clone);
+return false;
+
+ }
+
+
+
+
+ 
+$(document).ready(function (){
+    validate();
+    $('#fname, #lname, #email, #userid, #classname, #section, #instructor, #roomnum').change(validate);
+});
+
+function validate(){
+    if ($('#fname').val().length   >   0   &&
+        $('#lname').val().length  >   0   &&
+        $('#email').val().length    >   0 &&
+        $('#userid').val().length > 0 &&
+        $('#classname').val().length > 0 &&
+        $('#section').val().length    >   0 &&
+        $('#instructor').val().length    >   0 &&
+        $('#roomnum').val().length    >   0) {
+        $("input[type=submit]").prop("disabled", false);
+    }
+    else {
+        $("input[type=submit]").prop("disabled", true);
+    }
+}
+
    
-  $(document).on('click','.deleteRow',function(){ 
-  $(this).parent('div').remove(); 
-  return false;}); 
+  function removeRow(){
+  var lastGroup = $('.modal-body').last();
+  lastGroup.remove();
+  return false;
+
+
+  }
+
+
   
   
  

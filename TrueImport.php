@@ -87,11 +87,10 @@ if (!$db)
   {
     die ('Cannot find database : ' . mysql_error());
   }
-
- $name = mysql_real_escape_string($_POST['classname']);
- $section = mysql_real_escape_string($_POST['section']);
- $instructor = mysql_real_escape_string($_POST['instructor']);
- $room = mysql_real_escape_string($_POST['roomnum']);
+ $name = mysql_real_escape_string($_POST['classname2']);
+ $section = mysql_real_escape_string($_POST['section2']);
+ $instructor = mysql_real_escape_string($_POST['instructor2']);
+ $room = mysql_real_escape_string($_POST['roomnum2']);
 
 $sql = "INSERT INTO Courses (CourseID, name, section, InstructorID, Room) Values (NULL, '". $name ."', '". $section ."', '". $instructor ."', '". $room ."' )";
 
@@ -100,27 +99,52 @@ $query = mysql_query($sql);
 $lastInsert = mysql_insert_id();
 
 
+$file = mysql_real_escape_string($_POST['the_file']);
 
 
- $Fname = mysql_real_escape_string($_POST['Fname']);
- $Lname = mysql_real_escape_string($_POST['Lname']);
- $bsuUsername = mysql_real_escape_string($_POST['BSUemail']);
- $id= mysql_real_escape_string($_POST['UserID']);
- 
+$temp = "CREATE TABLE temp (LastName VARCHAR(40), FirstName VARCHAR(40), Username VARCHAR(40), StudentID VARCHAR(40), LastAccess VARCHAR(100), Availability VARCHAR(255))";
 
-$sql2 = "INSERT INTO CapstoneUsers (id, BSUEmail, Fname, Lname, Pass) Values ('". $id ."','". $bsuUsername ."', '". $Fname ."','". $Lname ."', 'Pass')";
+mysql_query($temp);
 
-$query2 = mysql_query($sql2);
+$sql2="LOAD DATA LOCAL INFILE '". $file ."'
+    INTO TABLE `temp`
+    FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '”' AND '\"'
+    LINES TERMINATED BY '\\r\\n'
+    
+    ";
+
+mysql_query($sql2);
+
+$insert = "INSERT INTO CapstoneUsers (id, BSUEmail, FName, LName, Active) SELECT StudentID, Username, FirstName, LastName, Availability FROM temp";
+
+mysql_query($insert);
+
+//$connect = "INSERT INTO UserCourses (UserID, CourseID) VALUES (SELECT StudentID FROM temp, '". $lastInsert ."')";
+
+//mysql_query($connect);
+
+//$drop = "DROP TABLE temp";
+
+//mysql_query($drop);
+
+
+
+
+
+
+
+
 
 $sql3 = "INSERT INTO UserCourses(CourseID, UserID) Values ('". $lastInsert ."', '". $id ."')";
 
 $query3 = mysql_query($sql3);
 
+
 ?>
 
 <body> 
   
-   <div class = "alert alert-success">Class Created!</div>
+   <div class = "alert alert-success">Import Successful!</div>
 </body>
 </html>
 
