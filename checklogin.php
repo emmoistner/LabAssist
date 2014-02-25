@@ -30,12 +30,28 @@ if($count==1){
 	$_SESSION['Lname'] = $row[3]; 
 	//$_SESSION['PositionID'] = $row['PositionID'];
 	$_SESSION['ID'] = $row[4];
+	$id = $row[4];
 	$_SESSION['active'] = $row[5];
+
+	$sql2 = "Select Student, Instructor, LabAssistant, Administrator from AccountLevel where UserId=".$id;
+	$data2 = mysql_query($sql2, $link);
+	$results=mysql_fetch_array($data2, MYSQL_ASSOC);
+	$_SESSION['Student'] = $results['Student'];
+	$_SESSION['Instructor'] = $results['Instructor'];
+	$_SESSION['LabAssistant'] = $results['LabAssistant'];
+	$_SESSION['Administrator'] = $results['Administrator'];
+
+
+
 /* Redirect to a different page in the current directory that was requested */
 	$host  = $_SERVER['HTTP_HOST'];
 	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 	$extra = 'login_success.php';
+	
+
 	mysql_close($link);
 	exit;
-} else {}
+} else {
+	header("location:index.php");
+}
 ?>

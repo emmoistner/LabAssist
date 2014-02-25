@@ -17,6 +17,9 @@
     <?php
     require('nav.php');
     require('connect.php');
+    if(!isset($_SESSION['Fname']) || $_SESSION['Administrator']==0) {
+  header("location:index.php");
+}
 
     $id = $_GET['id'];
 

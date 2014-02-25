@@ -20,6 +20,7 @@ $accountActive = '';
 $dashboardActive = '';
 $settingsActive = '';
 $accountdropdownActive ='';
+$carouselActive='';
 
 if (curPageName() == "index.php")
 {
@@ -49,6 +50,10 @@ if (curPageName() == "Import.php")
 {
   $importActive = "class='active'";
 }
+if (curPageName() == "carousel.php")
+{
+  $carouselActive = "class='active'";
+}
 if ($accountActive || $dashboardActive || $settingsActive == "class='active'")
 {
 	$accountdropdownActive = " active";
@@ -70,6 +75,9 @@ if ($accountActive || $dashboardActive || $settingsActive == "class='active'")
 	 { 
 	 	echo "<li ".$clockinActive."><a href='clockin.php'>Clock-in</a></li>";
 	 	echo "<li ".$importActive."><a href ='Import.php'>Classes</a></li>";
+    if($_SESSION['Administrator']==1) {
+      echo "<li ".$carouselActive."><a href='carousel.php'>Carousel</a></li>";
+    }
 		?>
 		<li class="dropdown<?php echo "$accountdropdownActive"; ?>">
         	<a href ="toggleDropdown()"  class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>

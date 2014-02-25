@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if(!isset($_SESSION['Fname']) || $_SESSION['Administrator']==0) {
+      header("location:index.php");
+    } else {
 
     header("location:carousel.php");
     if(($_FILES["File"]["name"]) != '') {
@@ -24,4 +28,5 @@
      require('connect.php');
      $query = 'Update Carousel set Active= '.$active.', PictureLocation="'.$filename.'", HeadlineText= "'.$headlineText.'", SubText= "'.$subText.'", ButtonText="'.$buttonText.'", Custom_ID=null, ButtonLink="'.$buttonLink.'" where Id='. $_GET['id'];
      mysql_query($query, $link);
+   }
 ?>

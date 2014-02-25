@@ -1,5 +1,8 @@
 <?php
-
+  session_start();
+  if(!isset($_SESSION['Fname']) || $_SESSION['Administrator']==0) {
+  header("location:index.php");
+} else {
 		header("location:carousel.php");
 		$filename = $_FILES["File"]["name"];
       move_uploaded_file($_FILES["File"]["tmp_name"],
@@ -19,4 +22,5 @@
      require('connect.php');
      $query = 'Insert into Carousel values(null, '.$active.', "'.$filename.'", "'.$headlineText.'", "'.$subText.'", "'.$buttonText.'", null, "'.$buttonLink.'")';
      mysql_query($query, $link);
+   }
 ?>

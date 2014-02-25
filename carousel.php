@@ -10,6 +10,9 @@
   require('files.php');
   require('connect.php');
   require('nav.php');
+  if(!isset($_SESSION['Fname']) || $_SESSION['Administrator']==0) {
+  header("location:index.php");
+}
   ?>
 
   </head>
