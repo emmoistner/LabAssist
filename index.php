@@ -10,6 +10,7 @@
 
 	<?PHP
 	include 'files.php';
+
 	?>
   </head>
 
@@ -19,6 +20,7 @@
 
 <?PHP
 require "nav.php";
+require("connect.php");
 ?>
 
 
@@ -26,36 +28,37 @@ require "nav.php";
     <div class="visible-lg visible-md">
     <div id="theCarousel" class="carousel slide">
       <div class="carousel-inner">
-        <div class="item active">
-          <img src="img/IMG_0936edit.jpg" alt="">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <a class="btn btn-large btn-primary" href="#">Login to get started</a>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img src="img/IMG_0933edit.jpg" alt="">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <a class="btn btn-large btn-primary" href="#">Learn more</a>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img src="img/IMG_0829edit.jpg" alt="">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Here is another headline.</h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <a class="btn btn-large btn-primary" href="#">Browse gallery</a>
-            </div>
-          </div>
-        </div>
+<?PHP
+       $query = 'Select * from Carousel';
+       $data = mysql_query($query, $link);
+      if( $data === false){
+        die( print_r(mysql_error(), true));
+      } 
+
+        $isActive = true;
+        while($results = mysql_fetch_array($data, MYSQL_ASSOC)) {
+          if($results['Active']) {
+            if($isActive) {
+              echo '<div class="item active">';
+              $isActive = false;
+            }
+            else {
+              echo '<div class="item">';
+            }
+
+             echo '<img src="img/'. $results['PictureLocation'] .'" alt="">
+              <div class="container">
+                <div class="carousel-caption">
+                  <h1>'. $results['HeadlineText'].'</h1>
+                  <p class="lead">'.$results['SubText'] .'</p>
+                  <a class="btn btn-large btn-primary" href="'. $results['ButtonLink'].'">'.$results['ButtonText'] .'</a>
+                </div>
+              </div>
+            </div>';
+          }
+        }
+?>
+
       </div>
       <a class="left carousel-control" href="#theCarousel" data-slide="prev">&lsaquo;</a>
       <a class="right carousel-control" href="#theCarousel" data-slide="next">&rsaquo;</a>
@@ -67,44 +70,32 @@ require "nav.php";
     <!-- Instructor Information -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
-    <div class="container marketing">
+<div class="container marketing">
 
       <!-- Three columns of text below the carousel -->
       <div class="row-fluid">
-        <div class="span4">
-          <img class="img-circle" src="img/Lucas_Patricia.jpg">
-          <h2>Patricia Lucas</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div><!-- /.span4 -->
-        <div class="span4">
-          <img class="img-circle" src="img/Johnson_Rick.jpg">
-          <h2>Rick Johnson</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div><!-- /.span4 -->
-        <div class="span4">
-          <img class="img-circle" src="img/Hua_David.jpg">
-          <h2>David Hua</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div><!-- /.span4 -->
-      </div><!-- /.row -->
-      <div class="row-fluid">
-        <div class="span4 offset2">
-          <img class="img-circle" src="holder.js/125x175">
-          <h2>Robert Turner</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div><!-- /.span4 -->
-        <div class="span4">
-          <img class="img-circle" src="holder.js/125x175">
-          <h2>Christopher Davison</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div><!-- /.span4 -->
+        
+        <?PHP
+        $sql = 'Select * from instructorbio';
+        $answer = mysql_query($sql, $link);
+         while($result = mysql_fetch_array($answer, MYSQL_ASSOC)) {
+          $sql2 = 'Select Fname, Lname from Capstoneusers where id =' . $result['ID'];
+          $answer2 = mysql_query($sql2, $link);
+
+          $result2 = mysql_fetch_array($answer2, MYSQL_ASSOC);
+
+
+        echo '<div class="span4">
+          <img class="img-circle" src="'.$result['PictureLocation'].'">
+          <h2>' . $result2['Fname'] . ' ' . $result2['Lname'] . '</h2>
+          <p>'.$result['QuickBio'].'</p>
+          <p><a class="btn" href="'.$result['ClassUrl'].'">View details &raquo;</a></p>
+        </div><!-- /.span4 -->';
+        }
+
+        ?>
+  
        </div><!-- /.row -->
-   
    <hr class="featurette-divider">
       
    <footer>
