@@ -161,7 +161,7 @@ echo "
             </thead>
             <tbody>
 	 ";
-		$query = "SELECT courses.name, courses.section, courses.Room, capstoneusers.Fname, capstoneusers.Lname FROM capstoneusers,usercourses,courses WHERE UserID = $currentID and UserID = capstoneusers.id and usercourses.CourseID = courses.CourseID";
+		$query = "SELECT courses.name, courses.section, courses.Room, capstoneusers.Fname, capstoneusers.Lname FROM capstoneusers,usercourses,courses WHERE UserID = $currentID and InstructorID = capstoneusers.id and usercourses.CourseID = courses.CourseID";
 		$data = mysql_query($query, $link);
 		while($results = mysql_fetch_assoc($data)) 
 		{
