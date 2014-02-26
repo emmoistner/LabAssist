@@ -38,7 +38,8 @@
 		{
 			$Firstname = $results["Fname"];
 			$Lastname = $results["Lname"];
-			$Username = $results["BSUEmail"];			
+			$Username = $results["BSUEmail"];
+					
 		}
 	mysql_free_result($data);
 	
@@ -66,7 +67,7 @@
         <hr />
         <h5>Last Name</h5><h4><?PHP echo ucfirst($Lastname);  ?></h4>
         <hr/>
-        <h5>Username</h5><h4><?PHP echo str_replace("@bsu.edu", "", $username); ?></h4>
+        <h5>Username</h5><h4><?PHP echo str_replace("@bsu.edu", "", $Username);	?></h4>
         <hr />
         <h5><a href="#">Change Password </a></h5>
       </div>
