@@ -21,6 +21,7 @@ $dashboardActive = '';
 $settingsActive = '';
 $accountdropdownActive ='';
 $carouselActive='';
+$studentTimesActive='';
 
 if (curPageName() == "index.php")
 {
@@ -54,6 +55,10 @@ if (curPageName() == "carousel.php")
 {
   $carouselActive = "class='active'";
 }
+if (curPageName() == "studenttimes.php")
+{
+  $studentTimesActive = "class='active'";
+}
 if ($accountActive || $dashboardActive || $settingsActive == "class='active'")
 {
 	$accountdropdownActive = " active";
@@ -73,10 +78,18 @@ if ($accountActive || $dashboardActive || $settingsActive == "class='active'")
 	
     if (isset($_SESSION['Fname']))
 	 { 
+    if($_SESSION['Student']==1) {
 	 	echo "<li ".$clockinActive."><a href='clockin.php'>Clock-in</a></li>";
+   }
 	 	echo "<li ".$importActive."><a href ='Import.php'>Classes</a></li>";
+     if($_SESSION['Instructor']==1) {
+      echo "<li ".$studentTimesActive."><a href='studenttimes.php'>Student Times</a></li>";
+    }
     if($_SESSION['Administrator']==1) {
-      echo "<li ".$carouselActive."><a href='carousel.php'>Carousel</a></li>";
+      echo "<li ".$carouselActive."><a href='carousel.php'>Banner</a></li>";
+    }
+    if($_SESSION['Administrator']==1 || $_SESSION['Instructor']==1) {
+      echo "<li ".$importActive."><a href ='Import.php'>Import Class</a></li>";
     }
 		?>
 		<li class="dropdown<?php echo "$accountdropdownActive"; ?>">
@@ -90,7 +103,7 @@ if ($accountActive || $dashboardActive || $settingsActive == "class='active'")
 			</ul> 
         </li>
 		<?PHP
-    if($_SESSION['active'])
+    if($_SESSION['active'] && $_SESSION['Student']==1)
     {
       echo "<li ".$clockoutActive."><a href='clockout.php'>Clock-out</a></li>";
     }
