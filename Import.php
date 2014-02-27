@@ -18,52 +18,6 @@
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
     }
     
-    table {
-      max-width: 100%;
-      background-color: #fff;
-      border-collapse: collapse;
-      border-spacing: 0;
-      width: 100%;
-      margin-bottom: 20px;
-    }
-    table th{
-      background: #eae4ff;
-    }
-    table th,
-    table td {
-      padding: 8px;
-      line-height: 20px;
-      text-align: left;
-      vertical-align: top;
-      border-top: 1px solid #dddddd;
-    }
-    table {
-      border: 1px solid #dddddd;
-      border-collapse: separate;
-      *border-collapse: collapse;
-      border-left: 0;
-      -webkit-border-radius: 4px;
-         -moz-border-radius: 4px;
-              border-radius: 4px;
-    }
-    table th,
-    table td {
-      border-left: 1px solid #dddddd;
-    }
-
-    table tr:nth-child(odd){
-      background-color: #f9f9f9;
-    }
-
-    table tr:hover td
-    {
-      background-color: #f5f5f5;
-    }
-
-    table tr:first-child{
-      font-weight: bold;
-    }
-    
      
    </style> 
  </head>
@@ -73,31 +27,28 @@
  
  require ('nav.php');
  require ('includeJS.php');
+ require ('files.php');
+ require ('connect.php');
+
  ?>
  <body> 
-  
    <div id="wrap">
-     <h1>Classes</h1> 
- 
-        
+     <h1>Classes</h1>
        </br> 
        </br> 
-       <button id ="popover" type ="button" class = "btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal2" >Import Class List</button> 
-   
-        
-
- 
-       <form action="importClassList.php"method="post">
+       <form action="CreateClassList.php"method="post">
+         <h3 class="modal-title" id="myModalLabel">Create a New Class List</h3>
+       </br>
+          <h4 class="modal-title" id="myModalLabel">Create A New Class</h4>  
        <div class="modal-header"> 
-         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> 
-         <h4 class="modal-title" id="myModalLabel">Create A New Class List</h4> 
          <input type ="text" class="input-small" placeholder = "Class Name" name ="classname" id="classname"required="true"/> 
          <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor" id="instructor"required/> 
          <input type ="text" class="input-small" placeholder = "Section" name="section" id="section" required/> 
          <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum" id="roomnum" required/>  
          </br>
        </div>
-         <div class="modal-body" id="d1">
+        <h4 class="modal-title" id="myModalLabel2">Create the Student List</h4> 
+         <div class="modal-body" id="d1"> 
          <input type ="text" class="input-small" placeholder = "First Name" name = "Fname" id="fname" required="required"/> 
          <input type ="text" class="input-small" placeholder = "Last Name" name = "Lname" id="lname" required="required"/> 
          <input type ="text" class="input-small" placeholder = "User Name" name = "BSUemail" id="email"required ="required"/> 
@@ -109,46 +60,48 @@
          <button type ="button" class = "btn btn-sm btn-primary" onclick="removeRow()">Delete</button> 
        </br>
         </br>
-        <div class ="modal-footer">
-         <input type = "submit" name="submit" class = "btn btn-primary" data-dismiss="modal"></input> 
-       </div>
+        <p align = "right">
+        <button type="reset" class="btn btn-default" data-dismiss="modal">Clear</button> 
+        <button type = "submit" name="submit" class = "btn btn-primary" data-dismiss="modal">Create</button> 
+      </p>
+       
      </form>
 
- 
+ </br>
+</br>
 
-
+     <h3 class="modal-title" id="myModalLabel">Import a Class List</h3> 
        <div class="modal-header"> 
          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button> 
-         <h4 class="modal-title" id="myModalLabel">Create the Class</h4> 
          </div>
-          <form action ="TrueImport.php" method="post"> 
+          <h4 class="modal-title" id="myModalLabel">Create the Class</h4> 
+        </br>
+          <form action ="ImportCSV.php" method="post"> 
          <input type ="text" class="input-small" placeholder = "Class Name" name ="classname2" required="required"/> 
          <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor2" required="required"/> 
          <input type ="text" class="input-small" placeholder = "Section" name ="section2" required="required"/> 
-         </br>
-         </br> 
          <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum2" required="required"/> 
-         
-       
-       
        <div class ="modal-bodynew">
- 
         </br>
+        <h4 class="modal-title" id="myModalLabel1">Import Student List</h4> 
        <input type="file" id="the_file" required="required" accept=".csv" class="filestyle" data-classButton="btn btn-primary" data-buttonText="Choose a File to Import" name="the_file" /> 
-         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+       <p align = "right">
+         <button type="reset" class="btn btn-default" data-dismiss="modal">Clear</button> 
          <button type="submit" class="btn btn-primary" data-dismiss="modal">Create</button> 
-         
+       </p>
        </div> 
-       </form> 
- 
- 
-  
-  
-     <div id="file_info"></div> 
-     <div id="list"></div> 
-     <div id ="error" class="alert alert-warning alert-dismissable">
+       </form>
+
+
+       </br>
+       </br> 
+       <div id ="error" class="alert alert-warning alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
   <strong>Warning!</strong> File extension must be .CSV!
+</div>
+     <div id="file_info"></div> 
+     <div id="list"></div> 
+
 
      
 
