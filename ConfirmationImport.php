@@ -15,7 +15,7 @@
  require ('connect.php');
 
 
-$insert = "INSERT INTO CapstoneUsers (id, BSUEmail, FName, LName, Pass, Active) SELECT StudentID, Username, FirstName, LastName, StudentID, Availability FROM temp";
+$insert = "INSERT INTO CapstoneUsers (id, BSUEmail, FName, LName, Pass) SELECT StudentID, Username, FirstName, LastName, StudentID FROM temp";
 
 mysql_query($insert);
 
