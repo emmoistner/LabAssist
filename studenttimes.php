@@ -43,11 +43,11 @@ $(document).ready(function() {
 
 	 	$timeIn = $results['TimeIn'];
 	 	$dateTimeIn = DateTime::createFromFormat("Y-m-d H:i:s", $timeIn);
-	 	$finalTimeIn = date_format($dateTimeIn, "l F j, Y g:h A");
+	 	$finalTimeIn = date_format($dateTimeIn, "l F j, Y g:i A");
 
 	 	$timeOut = $results['TimeOut'];
 	 	$dateTimeOut = DateTime::createFromFormat("Y-m-d H:i:s", $timeOut);
-	 	$finalTimeOut = date_format($dateTimeOut, "l F j, Y g:h A");
+	 	$finalTimeOut = date_format($dateTimeOut, "l F j, Y g:i A");
 
 	 	echo "<tr>
 	 			<th>".$results['Fname'].' '.$results['Lname']."</th><th>".$results['IP']."</th><th>".$results['name']."</th><th>".$results['section']."</th><th>".$finalTimeIn."</th><th>".$finalTimeOut."</th><th>".$results['TimeDiff']."</th>
