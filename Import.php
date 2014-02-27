@@ -112,22 +112,7 @@
 
    
 
-   <?php
 
-
-   $con = mysql_connect('localhost', 'root', 'root');
-  if (!$con)
-  {
-    die('Not connected : ' . mysql_error());
-  }
-
-  $db = mysql_select_db('LabTrack', $con);
-if (!$db)
-  {
-    die ('Cannot find database : ' . mysql_error());
-  }
-
-  ?>
 
    
    <script src = "dist/js/jquery-2.0.3.js"></script> 

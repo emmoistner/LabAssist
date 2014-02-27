@@ -1,16 +1,6 @@
 <?php
 
-$con = mysql_connect('localhost', 'root', 'root');
-  if (!$con)
-  {
-    die('Not connected : ' . mysql_error());
-  }
-
-  $db = mysql_select_db('LabTrack', $con);
-if (!$db)
-  {
-    die ('Cannot find database : ' . mysql_error());
-  }
+require('connect.php');
 
 
   $id = $_REQUEST['id'] ;
