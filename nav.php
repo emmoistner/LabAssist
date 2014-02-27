@@ -81,7 +81,7 @@ if ($accountActive || $dashboardActive || $settingsActive == "class='active'")
     if($_SESSION['Student']==1) {
 	 	echo "<li ".$clockinActive."><a href='clockin.php'>Clock-in</a></li>";
    }
-	 	echo "<li ".$importActive."><a href ='Import.php'>Classes</a></li>";
+
      if($_SESSION['Instructor']==1) {
       echo "<li ".$studentTimesActive."><a href='studenttimes.php'>Student Times</a></li>";
     }
