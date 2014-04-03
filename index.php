@@ -73,9 +73,10 @@ require("connect.php");
 <div class="container marketing">
 
       <!-- Three columns of text below the carousel -->
-      <div class="row-fluid">
+
         
         <?PHP
+        $counter = 0;
         $sql = 'Select * from instructorbio';
         $answer = mysql_query($sql, $link);
          while($result = mysql_fetch_array($answer, MYSQL_ASSOC)) {
@@ -83,25 +84,32 @@ require("connect.php");
           $answer2 = mysql_query($sql2, $link);
 
           $result2 = mysql_fetch_array($answer2, MYSQL_ASSOC);
-
-
+          if($counter==0) {
+            echo '<div class="row-fluid">';
+          }
         echo '<div class="span4">
           <img class="img-circle" src="'.$result['PictureLocation'].'">
           <h2>' . $result2['Fname'] . ' ' . $result2['Lname'] . '</h2>
           <p>'.$result['QuickBio'].'</p>
           <p><a class="btn" href="'.$result['ClassUrl'].'">View details &raquo;</a></p>
-        </div><!-- /.span4 -->';
+        </div>';
+          if($counter==2) {
+            echo '</div>';
+            $counter=0;
+          }
+     
         }
 
         ?>
   
-       </div><!-- /.row -->
+
    <hr class="featurette-divider">
       
    <footer>
     <p class="pull-right"><a href="#">Back to top</a></p>
-    <p>2013 Ball State University 2000 W. University Ave. Muncie, IN 47306· <a href="http://www.bsu.edu">bsu.edu</a></p>
+    <p class="pull-left">2013 Ball State University 2000 W. University Ave. Muncie, IN 47306· <a href="http://www.bsu.edu">bsu.edu</a></p>
   </footer>
+
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="dist/js/jquery-2.0.3.js"></script>
 	<script src="dist/js/bootstrap.js"></script>

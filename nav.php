@@ -22,6 +22,7 @@ $settingsActive = '';
 $accountdropdownActive ='';
 $carouselActive='';
 $studentTimesActive='';
+$createInstructor='';
 
 if (curPageName() == "index.php")
 {
@@ -59,6 +60,10 @@ if (curPageName() == "studenttimes.php")
 {
   $studentTimesActive = "class='active'";
 }
+if (curPageName() == "createinstructor.php")
+{
+  $createInstructor = "class='active'";
+}
 if ($accountActive || $dashboardActive || $settingsActive == "class='active'")
 {
 	$accountdropdownActive = " active";
@@ -87,6 +92,8 @@ if ($accountActive || $dashboardActive || $settingsActive == "class='active'")
     }
     if($_SESSION['Administrator']==1) {
       echo "<li ".$carouselActive."><a href='carousel.php'>Banner</a></li>";
+      echo "<li ".$createInstructor."><a href ='createinstructor.php'>New Instructor</a></li>";
+
     }
     if($_SESSION['Administrator']==1 || $_SESSION['Instructor']==1) {
       echo "<li ".$importActive."><a href ='Import.php'>Import Class</a></li>";
