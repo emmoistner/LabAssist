@@ -11,15 +11,15 @@
 
 
      $ID = $_POST['ID'];
-     $email = $_POST['email'];
+     $uname = $_POST['email'];
      $fname = $_POST['Fname'];
      $lname = $_POST['Lname'];
      $url = $_POST['url'];
      $bio = $_POST['Bio'];
      require('connect.php');
-     $query = 'Insert into CapstoneUsers values('.$ID.', "'.$email.'", "'.$fname.'", null, "'.$lname.'", null, '.$ID.', null, null, 0)';
+     $query = 'Insert into CapstoneUsers values('.$ID.', "'.$uname.'", "'.$fname.'", null, "'.$lname.'", '.$ID.', 0)';
      mysql_query($query, $link);
-     $query2 = 'Insert into InstructorBio values('.$ID.', "'.$bio.'", "'.$url.'", "img/'.$filename.'")';
+     $query2 = 'Insert into InstructorBio values('.$ID.', "'.$bio.'", "Nothing Yet", "'.$url.'", "img/'.$filename.'")';
      mysql_query($query2, $link);
      $query3 = 'Insert into accountlevel values('.$ID.', 0, 1, 0 , 0)';
      mysql_query($query3, $link);

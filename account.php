@@ -32,13 +32,13 @@
 <?PHP
 	include "connect.php";
 	$currentID =$_SESSION['ID'];
-	$query = "Select Fname, Lname, BSUEmail FROM capstoneusers where id = $currentID";
+	$query = "Select Fname, Lname, Uname FROM UserAccounts where id = $currentID";
 	$data = mysql_query($query, $link);
 		while($results = mysql_fetch_assoc($data)) 
 		{
 			$Firstname = $results["Fname"];
 			$Lastname = $results["Lname"];
-			$Username = $results["BSUEmail"];
+			$Username = $results["Uname"];
 					
 		}
 	mysql_free_result($data);
@@ -67,7 +67,7 @@
         <hr />
         <h5>Last Name</h5><h4><?PHP echo ucfirst($Lastname);  ?></h4>
         <hr/>
-        <h5>Username</h5><h4><?PHP echo str_replace("@bsu.edu", "", $Username);	?></h4>
+        <h5>Username</h5><h4><?PHP echo $Username;	?></h4>
         <hr />
         <h5><a href="#">Change Password </a></h5>
       </div>
@@ -162,7 +162,7 @@ echo "
             </thead>
             <tbody>
 	 ";
-		$query = "SELECT courses.name, courses.section, courses.Room, capstoneusers.Fname, capstoneusers.Lname FROM capstoneusers,usercourses,courses WHERE UserID = $currentID and InstructorID = capstoneusers.id and usercourses.CourseID = courses.CourseID";
+		$query = "SELECT courses.name, courses.section, courses.Room, UserAccounts.Fname, UserAccounts.Lname FROM UserAccounts,usercourses,courses WHERE UserID = $currentID and InstructorID = UserAccounts.id and usercourses.CourseID = courses.CourseID";
 		$data = mysql_query($query, $link);
 		while($results = mysql_fetch_assoc($data)) 
 		{
@@ -213,7 +213,7 @@ echo "
             </thead>
             <tbody>
 	 ";
-		$query = "SELECT courses.name, courses.section, courses.Room, capstoneusers.Fname, capstoneusers.Lname FROM capstoneusers, courses WHERE courses.InstructorID = $currentID and id = InstructorID";
+		$query = "SELECT courses.name, courses.section, courses.Room, UserAccounts.Fname, UserAccounts.Lname FROM UserAccounts, courses WHERE courses.InstructorID = $currentID and id = InstructorID";
 		$data = mysql_query($query, $link);
 		while($results = mysql_fetch_assoc($data)) 
 		{
@@ -264,7 +264,7 @@ echo "
             </thead>
             <tbody>
 	 ";
-		$query = "Select Fname, Lname, name, section, Room, Active from capstoneusers,usercourses, courses where usercourses.CourseID = courses.CourseID and id = UserID and InstructorID = $currentID;";
+		$query = "Select Fname, Lname, name, section, Room, Active from UserAccounts,usercourses, courses where usercourses.CourseID = courses.CourseID and id = UserID and InstructorID = $currentID;";
 		$data = mysql_query($query, $link);
 		while($results = mysql_fetch_assoc($data)) 
 		{

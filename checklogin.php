@@ -9,9 +9,9 @@ $mypassword=$_POST['password'];
 /*$myusername = stripslashes($myusername);
 $mypassword = stripslashes($mypassword);
 $myusername = strtolower($myusername);*/
-$E_mail = $myusername. "@bsu.edu";
+$username = $myusername;
 //$mypassword = sha1($mypassword);
-$sql="Select BSUEmail, Pass, Fname, Lname, ID, Active FROM CapstoneUsers WHERE BSUEmail='". $E_mail ."' and Pass='". $mypassword . "'";
+$sql="Select Uname, Pass, Fname, Lname, ID, Active FROM UserAccounts WHERE Uname='". $username ."' and Pass='". $mypassword . "'";
 
 $data = mysql_query($sql, $link);
 if( $data === false){
@@ -28,12 +28,11 @@ if($count==1){
 	session_start();
 	$_SESSION['Fname'] = $row[2]; 
 	$_SESSION['Lname'] = $row[3]; 
-	//$_SESSION['PositionID'] = $row['PositionID'];
 	$_SESSION['ID'] = $row[4];
 	$id = $row[4];
 	$_SESSION['active'] = $row[5];
 
-	$sql2 = "Select Student, Instructor, LabAssistant, Administrator from AccountLevel where UserId=".$id;
+	$sql2 = "Select Student, Instructor, LabAssistant, Administrator from AccountLevel where UserID=".$id;
 	$data2 = mysql_query($sql2, $link);
 	$results=mysql_fetch_array($data2, MYSQL_ASSOC);
 	$_SESSION['Student'] = $results['Student'];

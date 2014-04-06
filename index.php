@@ -80,7 +80,7 @@ require("connect.php");
         $sql = 'Select * from instructorbio';
         $answer = mysql_query($sql, $link);
          while($result = mysql_fetch_array($answer, MYSQL_ASSOC)) {
-          $sql2 = 'Select Fname, Lname from Capstoneusers where id =' . $result['ID'];
+          $sql2 = 'Select Fname, Lname from UserAccounts where id =' . $result['ID'];
           $answer2 = mysql_query($sql2, $link);
 
           $result2 = mysql_fetch_array($answer2, MYSQL_ASSOC);
