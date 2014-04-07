@@ -36,7 +36,7 @@ $(document).ready(function() {
             <tbody>
    <?php
    
-   $query= "Select courses.courseId, courses.name, courses.section, timeclock.UserId, timeClock.TimeIn, timeClock.TimeOut, TimeDiff(timeClock.TimeOut, timeClock.TimeIn) as TimeDiff, INET_NTOA(timeClock.IP), useraccounts.Fname, useraccounts.Lname from
+   $query= "Select courses.courseId, courses.name, courses.section, timeclock.UserId, timeClock.TimeIn, timeClock.TimeOut, TimeDiff(timeClock.TimeOut, timeClock.TimeIn) as TimeDiff, INET_NTOA(timeClock.IP) as IP, useraccounts.Fname, useraccounts.Lname from
 	courses, timeclock, useraccounts where courses.InstructorId=".$_SESSION['ID']." and timeclock.courseId=courses.courseId and useraccounts.Id = timeClock.userId";
 	$data = mysql_query($query, $link);
 	 while($results = mysql_fetch_array($data, MYSQL_ASSOC)) {
