@@ -27,7 +27,7 @@
             </div>
           </br>
             <div class="row-fluid">
-          <div class="span2 offset5"><input type ="text" class="form-control" placeholder = "BSU email" name ="email" required="required" maxlength="24"/></div>
+          <div class="span2 offset5"><input type ="text" class="form-control" placeholder = "BSU Username" name ="email" required="required" maxlength="24"/></div>
             </div>
           </br>
             <div class="row-fluid">

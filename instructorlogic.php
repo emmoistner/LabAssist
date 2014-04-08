@@ -3,7 +3,7 @@
   if(!isset($_SESSION['Fname']) || $_SESSION['Administrator']==0) {
   header("location:index.php");
 } else {
-		//header("location:index.php");
+		header("location:index.php");
 		$filename = $_FILES["File"]["name"];
       move_uploaded_file($_FILES["File"]["tmp_name"],
       "img/" . $filename);

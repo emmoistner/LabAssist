@@ -33,7 +33,7 @@
       $data = mysql_query($query, $link);
       while($results = mysql_fetch_array($data, MYSQL_ASSOC)) {
   	     echo '<div class="row-fluid">
-          <div class="span2">'.$results['Id'].'</div>
+          <div class="span2">'.$results['ID'].'</div>
           <div class="span2">'.$results['HeadlineText'].'</div>
           <div class="span2"><img src="img/'.$results['PictureLocation'].'" alt ="carousel_img", width="100" height="50"></div>';
           if($results['Active']) {
@@ -43,10 +43,10 @@
             echo '<div class="span2">No</div>';
           }
 
-          echo '<div class="span2"><a class="btn btn-default" href="carouselupdate.php?id='.$results['Id'].'">
+          echo '<div class="span2"><a class="btn btn-default" href="carouselupdate.php?id='.$results['ID'].'">
             <span class="glyphicon glyphicon-pencil"></span></a>
             </div>
-            <div class="span2"><a class="btn btn-danger" href="carouseldelete.php?id='.$results['Id'].'">
+            <div class="span2"><a class="btn btn-danger" href="carouseldelete.php?id='.$results['ID'].'">
             <span class="glyphicon glyphicon-remove"></span></a>
             </div>
             </div><br/>
