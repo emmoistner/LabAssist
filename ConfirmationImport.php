@@ -15,7 +15,16 @@
  require ('connect.php');
 
 
-$insert = "INSERT INTO CapstoneUsers (id, BSUEmail, FName, LName, Pass) SELECT StudentID, Username, FirstName, LastName, StudentID FROM temp";
+
+$temp = "SELECT StudentID, Username, FirstName, LastName, StudentID FROM temp";
+
+$result = mysql_query($temp);
+
+while ($answers = mysql_fetch_array($result)){
+	$query2 = 'INSERT INTO CapstoneUsers(id, BSUEmail, Fname, Lname, Password) VALUES (' .$answers["StudentID"]. ', "' .$answers["Username"]. '", "' .$answers["FirstName"]. '", "' .$answers["LastName"]. '", ' .$answers["StudentID"]. ')';
+
+	mysql_query($query2);
+}
 
 mysql_query($insert);
 
