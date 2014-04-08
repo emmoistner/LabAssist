@@ -76,6 +76,7 @@ require("connect.php");
 
         
         <?PHP
+        $divComplete = false;
         $counter = 0;
         $sql = 'Select * from instructorbio';
         $answer = mysql_query($sql, $link);
@@ -96,8 +97,16 @@ require("connect.php");
           if($counter==2) {
             echo '</div>';
             $counter=0;
+            $divComplete = true;
           }
-     
+          else {
+          $counter++;
+          $divComplete = false;
+          }
+        }
+
+        if(!$divComplete) {
+          echo '</div>';
         }
 
         ?>
