@@ -78,7 +78,7 @@ require("connect.php");
         <?PHP
         $divComplete = false;
         $counter = 0;
-        $sql = 'Select * from instructorbio';
+        $sql = 'Select * from InstructorBio';
         $answer = mysql_query($sql, $link);
          while($result = mysql_fetch_array($answer, MYSQL_ASSOC)) {
           $sql2 = 'Select Fname, Lname from UserAccounts where id =' . $result['ID'];

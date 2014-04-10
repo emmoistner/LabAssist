@@ -26,6 +26,7 @@ if($count==1){
 	header("location:login_success.php");
 	$row = mysql_fetch_array($data);
 	session_start();
+	$_SESSION['Uname'] = $row[0];
 	$_SESSION['Fname'] = $row[2]; 
 	$_SESSION['Lname'] = $row[3]; 
 	$_SESSION['ID'] = $row[4];
