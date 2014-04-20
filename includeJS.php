@@ -9,6 +9,10 @@
 		<script type="text/javascript" src="dist/chosen_V1.0.0/chosen.jquery.js"></script>
 		<script type="text/javascript" src="dist/chosen_V1.0.0/chosen.jquery.min.js"></script>
 		<script type="text/javascript" src="dist/js/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
+		<script type="text/javascript" src="dist/js/jquery.validate.js"></script>
+		<script type="text/javascript" src="dist/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="dist/js/additional-methods.js"></script>
+		<script type="text/javascript" src="dist/js/additional-methods.min.js"></script>
 		<script src="dist/js/dataTables.tableTools.js"></script>
 	</head>
 </html>

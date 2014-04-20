@@ -69,7 +69,7 @@
         <hr/>
         <h5>Username</h5><h4><?PHP echo $Username;	?></h4>
         <hr />
-        <h5><a href="#">Change Password </a></h5>
+        <h5><a href="changepassword.php">Change Password </a></h5>
       </div>
     </div>
   </div>
