@@ -18,23 +18,19 @@
 
 $temp = "SELECT StudentID, Username, FirstName, LastName, StudentID FROM temp";
 
-$result = mysql_query($temp);
+$result = mysqli_query(link, $temp);
 
-while ($answers = mysql_fetch_array($result)){
-	$query2 = 'INSERT INTO CapstoneUsers(id, BSUEmail, Fname, Lname, Password) VALUES (' .$answers["StudentID"]. ', "' .$answers["Username"]. '", "' .$answers["FirstName"]. '", "' .$answers["LastName"]. '", ' .$answers["StudentID"]. ')';
+$query = "INSERT INTO CapstoneUsers (StudentID, Username, FirstName, LastName, Password) SELECT StudentID, Username, FirstName, LastName, StudentID FROM temp ON DUPLICATE KEY UPDATE CapstoneUsers.StudentID = temp.StudentID, CapstoneUsers.Username = temp.Username, CapstoneUsers.FirstName = temp.FirstName, CapstoneUsers.LastName = temp.LastName, CapstoneUsers.Password = temp.StudentID";
 
-	mysql_query($query2);
-}
-
-mysql_query($insert);
+mysqli_query(link, $query);
 
 $connect = "INSERT INTO UserCourses (UserID, CourseID) SELECT StudentID, CourseID FROM temp";
 
-mysql_query($connect);
+mysqli_query(link, $connect);
 
 $drop = "DROP TABLE temp";
 
-mysql_query($drop);
+mysqli_query(link, $drop);
 
 
 
