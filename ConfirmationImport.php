@@ -20,7 +20,7 @@ $temp = "SELECT StudentID, Username, FirstName, LastName, StudentID FROM temp";
 
 $result = mysqli_query(link, $temp);
 
-$query = "INSERT INTO CapstoneUsers (StudentID, Username, FirstName, LastName, Password) SELECT StudentID, Username, FirstName, LastName, StudentID FROM temp ON DUPLICATE KEY UPDATE CapstoneUsers.StudentID = temp.StudentID, CapstoneUsers.Username = temp.Username, CapstoneUsers.FirstName = temp.FirstName, CapstoneUsers.LastName = temp.LastName, CapstoneUsers.Password = temp.StudentID";
+$query = "INSERT INTO UserAccounts (id, Uname, Fname, Lname, Pass) SELECT StudentID, Username, FirstName, LastName, StudentID FROM temp ON DUPLICATE KEY UPDATE UserAccounts.id = temp.StudentID, UserAccounts.Uname = temp.Username, UserAccounts.Fname = temp.FirstName, UserAccounts.Lname = temp.LastName, UserAccounts.Pass = temp.StudentID";
 
 mysqli_query(link, $query);
 

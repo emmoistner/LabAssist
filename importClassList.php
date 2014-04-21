@@ -19,7 +19,7 @@ $section = mysql_real_escape_string($_POST['section']);
 $instructor = mysql_real_escape_string($_POST['instructor']);
 $room = mysql_real_escape_string($_POST['roomnum2']);
 
-$sql = "INSERT INTO Courses (CourseID, name, section, InstructorID, Room) Values (NULL, '". $name ."', '". $section ."', '". $instructor ."', '". $room ."' )";
+$sql = "INSERT INTO Courses (id, Name, Section, InstructorID, Room) Values (NULL, '". $name ."', '". $section ."', '". $instructor ."', '". $room ."' )";
 
 $query = mysql_query($sql);
 
@@ -41,19 +41,19 @@ $(document).ready(function(){
   $('#table').dataTable({
       aoColumns: [
       {
-        sName: "LastName"
+        sName: "Lname"
       },
 
       {
-        sName: "FirstName"
+        sName: "Fname"
       },
 
       {
-        sName: "Username"
+        sName: "Uname"
       },
 
       {
-        sName: "StudentID"
+        sName: "id"
       }
       ]
      }).makeEditable({

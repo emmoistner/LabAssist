@@ -47,20 +47,7 @@
          <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum" id="roomnum" required/>  
          </br>
        </div>
-        <h4 class="modal-title" id="myModalLabel2">Create the Student List</h4> 
-         <div class="modal-body" id="d1"> 
-         <input type ="text" class="input-small" placeholder = "First Name" name = "Fname" id="fname" required="required"/> 
-         <input type ="text" class="input-small" placeholder = "Last Name" name = "Lname" id="lname" required="required"/> 
-         <input type ="text" class="input-small" placeholder = "User Name" name = "BSUemail" id="email"required ="required"/> 
-         <input type ="text" class="input-small" placeholder = "Student ID" name= "UserID" id="userid"required/>
-         </br>
-         </br>
-       </div>
-         <button type ="button" class = "btn btn-sm btn-primary" id="add" onclick="addRow()">Add</button> 
-         <button type ="button" class = "btn btn-sm btn-primary" onclick="removeRow()">Delete</button> 
-       </br>
-        </br>
-        <p align = "right">
+         <p align = "right">
         <button type="reset" class="btn btn-default" data-dismiss="modal">Clear</button> 
         <button type = "submit" name="submit" class = "btn btn-primary" data-dismiss="modal">Create</button> 
       </p>

@@ -25,7 +25,7 @@
  $instructor = mysql_real_escape_string($_POST['instructor2']);
  $room = mysql_real_escape_string($_POST['roomnum2']);
 
-$sql = "INSERT INTO Courses (CourseID, name, section, InstructorID, Room) Values (NULL, '". $name ."', '". $section ."', '". $instructor ."', '". $room ."' )";
+$sql = "INSERT INTO Courses (CourseID, Name, Section, InstructorID, Room) Values (NULL, '". $name ."', '". $section ."', '". $instructor ."', '". $room ."' )";
 
 $query = mysql_query($sql);
 
@@ -73,21 +73,21 @@ $(document).ready(function(){
       aoColumns: [
       {
 
-        sName: "LastName"
+        sName: "Lname"
       },
 
       {
 
-        sName: "FirstName"
+        sName: "Fname"
       },
 
       {
-        sName: "Username"
+        sName: "Uname"
 
       },
 
       {
-        sName: "StudentID"
+        sName: "id"
       }
 
 
