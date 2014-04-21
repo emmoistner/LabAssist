@@ -23,7 +23,7 @@
 
     $id = $_GET['id'];
 
-      $query ='Select * from Carousel where Id =' . $id;
+      $query ='Select * from Carousel where ID =' . $id;
       $data = mysql_query($query, $link);
       $results = mysql_fetch_array($data, MYSQL_ASSOC);
     

@@ -11,7 +11,7 @@ $mypassword = stripslashes($mypassword);
 $myusername = strtolower($myusername);*/
 $username = $myusername;
 //$mypassword = sha1($mypassword);
-$sql="Select Uname, Pass, Fname, Lname, ID, Active FROM UserAccounts WHERE Uname='". $username ."' and Pass='". $mypassword . "'";
+$sql="Select Uname, Pass, Fname, Lname, id, Active FROM UserAccounts WHERE Uname='". $username ."' and Pass='". $mypassword . "'";
 
 $data = mysql_query($sql, $link);
 if( $data === false){

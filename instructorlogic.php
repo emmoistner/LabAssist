@@ -21,7 +21,7 @@
      mysql_query($query, $link);
      $query2 = 'Insert into InstructorBio values('.$ID.', "'.$bio.'", "Nothing Yet", "'.$url.'", "img/'.$filename.'")';
      mysql_query($query2, $link);
-     $query3 = 'Insert into accountlevel values('.$ID.', 0, 1, 0 , 0)';
+     $query3 = 'Insert into AccountLevel values('.$ID.', 0, 1, 0 , 0)';
      mysql_query($query3, $link);
    }
 ?>

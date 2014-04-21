@@ -76,7 +76,7 @@ require('connect.php');
        while($results = mysql_fetch_array($data, MYSQL_ASSOC)) {
           $courseID = $results['CourseID'];
      
-          $secondQuery = "select name, section from courses where courseID =" . $courseID;
+          $secondQuery = "Select Name, Section from Courses where CourseID =" . $courseID;
 
 
           $returned = mysql_query($secondQuery, $link);
@@ -111,10 +111,10 @@ require('connect.php');
 
 
             if($enable) {
-              echo "<option>".$answers['name']. " Section ". $answers['section'] . "</option>";
+              echo "<option>".$answers['Name']. " Section ". $answers['Section'] . "</option>";
             }
             else {
-              echo "<option disabled='true'>".$answers['name']. " Section ". $answers['section'] . "</option>";
+              echo "<option disabled='true'>".$answers['Name']. " Section ". $answers['Section'] . "</option>";
             }
         }
         echo "</select>

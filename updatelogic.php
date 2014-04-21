@@ -26,7 +26,7 @@
      $buttonLink = $_POST['ButtonLink'];
      $subText = $_POST['SubText'];
      require('connect.php');
-     $query = 'Update Carousel set Active= '.$active.', PictureLocation="'.$filename.'", HeadlineText= "'.$headlineText.'", SubText= "'.$subText.'", ButtonText="'.$buttonText.'", Custom_ID=null, ButtonLink="'.$buttonLink.'" where Id='. $_GET['id'];
+     $query = 'Update Carousel set Active= '.$active.', PictureLocation="'.$filename.'", HeadlineText= "'.$headlineText.'", SubText= "'.$subText.'", ButtonText="'.$buttonText.'", Custom_ID=null, ButtonLink="'.$buttonLink.'" where ID='. $_GET['id'];
      mysql_query($query, $link);
    }
 ?>

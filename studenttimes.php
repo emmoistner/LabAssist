@@ -36,8 +36,8 @@ $(document).ready(function() {
             <tbody>
    <?php
    
-   $query= "Select courses.courseId, courses.name, courses.section, timeclock.UserId, timeClock.TimeIn, timeClock.TimeOut, TimeDiff(timeClock.TimeOut, timeClock.TimeIn) as TimeDiff, INET_NTOA(timeClock.IP) as IP, useraccounts.Fname, useraccounts.Lname from
-	courses, timeclock, useraccounts where courses.InstructorId=".$_SESSION['ID']." and timeclock.courseId=courses.courseId and useraccounts.Id = timeClock.userId";
+   $query= "Select Courses.CourseID, Courses.Name, Courses.Section, TimeClock.UserID, TimeClock.TimeIn, TimeClock.TimeOut, TimeDiff(TimeClock.TimeOut, TimeClock.TimeIn) as TimeDiff, INET_NTOA(TimeClock.IP) as IP, UserAccounts.Fname, UserAccounts.Lname from
+	Courses, TimeClock, UserAccounts where Courses.InstructorID=".$_SESSION['ID']." and TimeClock.CourseID=Courses.CourseID and UserAccounts.id = TimeClock.UserID";
 	$data = mysql_query($query, $link);
 	 while($results = mysql_fetch_array($data, MYSQL_ASSOC)) {
 
@@ -50,7 +50,7 @@ $(document).ready(function() {
 	 	$finalTimeOut = date_format($dateTimeOut, "l F j, Y g:i A");
 
 	 	echo "<tr>
-	 			<th>".$results['Fname'].' '.$results['Lname']."</th><th>".$results['IP']."</th><th>".$results['name']."</th><th>".$results['section']."</th><th>".$finalTimeIn."</th><th>".$finalTimeOut."</th><th>".$results['TimeDiff']."</th>
+	 			<th>".$results['Fname'].' '.$results['Lname']."</th><th>".$results['IP']."</th><th>".$results['Name']."</th><th>".$results['Section']."</th><th>".$finalTimeIn."</th><th>".$finalTimeOut."</th><th>".$results['TimeDiff']."</th>
 	 			</tr>";
 	 }
    ?>

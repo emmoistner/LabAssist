@@ -23,13 +23,13 @@ if(isset($_SESSION['Fname']) && isset($_POST['courses'])){
     $className = substr($course, 0, 7);
     $section = substr($course, 16);
 
-    $courseIDSql = "Select courseID from Courses where name ='" . $className . "' and section =" . $section;
+    $courseIDSql = "Select CourseID from Courses where Name ='" . $className . "' and Section =" . $section;
     $courseIDResult = mysql_query($courseIDSql, $link);
     $courseIDArray = mysql_fetch_array($courseIDResult, MYSQL_ASSOC);
     $courseID = $courseIDArray['courseID'];
     $clockInSql = "Insert into TimeClock (UserID, IP, TimeIn, CourseID) values(". $userID. ", INET_ATON('".$ip. "'), CURRENT_TIMESTAMP, ". $courseID . ")";
     mysql_query($clockInSql, $link);
-    $activeSql = "Update UserAccounts set active =1 where ID=" . $userID;
+    $activeSql = "Update UserAccounts set Active =1 where id=" . $userID;
     mysql_query($activeSql, $link);
   }
 }

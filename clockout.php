@@ -76,14 +76,14 @@ require('connect.php');
         $enable = TRUE;
        while($results = mysql_fetch_array( $data, MYSQL_ASSOC)) {
           $courseID = $results['CourseID'];
-          $secondQuery = "select name, section from courses where courseID =" . $courseID;
+          $secondQuery = "select Name, Section from Courses where CourseID =" . $courseID;
 
 
           $returned = mysql_query($secondQuery, $link);
           $answers = mysql_fetch_array($returned, MYSQL_ASSOC);
 
 
-              echo "<option>".$answers['name']. " Section ". $answers['section'] . "</option>";
+              echo "<option>".$answers['Name']. " Section ". $answers['Section'] . "</option>";
  
         }
         echo "</select>

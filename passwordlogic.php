@@ -17,12 +17,12 @@
 
 
    
-     $query = 'Select * from UserAccounts where ID ='. $id;
+     $query = 'Select * from UserAccounts where id ='. $id;
      $response = mysql_query($query, $link);
      $results = mysql_fetch_array($response);
      $pass = $results['Pass'];
      if($pass == $currentPass) {
-      $query2 = "Update UserAccounts set Pass ='".$newPass."' where ID = ".$id; 
+      $query2 = "Update UserAccounts set Pass ='".$newPass."' where id = ".$id; 
       mysql_query($query2, $link);
         echo '<div class = "alert alert-success">Password changed.</div>';
      }
