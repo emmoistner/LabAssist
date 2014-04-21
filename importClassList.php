@@ -17,7 +17,7 @@
 $name = mysql_real_escape_string($_POST['classname']);
 $section = mysql_real_escape_string($_POST['section']);
 $instructor = mysql_real_escape_string($_POST['instructor']);
-$room = mysql_real_escape_string($_POST['roomnum2']);
+$room = mysql_real_escape_string($_POST['roomnum']);
 
 $sql = "INSERT INTO Courses (id, Name, Section, InstructorID, Room) Values (NULL, '". $name ."', '". $section ."', '". $instructor ."', '". $room ."' )";
 
