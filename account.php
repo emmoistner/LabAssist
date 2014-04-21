@@ -23,15 +23,20 @@
 
 <body>
 <?PHP 
-	require 'nav.php'; 
+	include 'nav.php'; 
 ?>
 
 <?PHP
-	require 'breadcrumbs.php';
+	include 'breadcrumbs.php';
 ?>
 <?PHP
+	$Administrator = ' ';
+	$Instructor = ' ';
+	$LabAssistant = ' ';
+	$Student = ' ';
+	
 	include "connect.php";
-	$currentID =$_SESSION['ID'];
+	$currentID = $_SESSION['ID'];
 	$query = "Select Fname, Lname, Uname FROM UserAccounts where id = $currentID";
 	$data = mysql_query($query, $link);
 		while($results = mysql_fetch_assoc($data)) 
@@ -43,9 +48,9 @@
 		}
 	mysql_free_result($data);
 	
-	$query = "SELECT Administrator, Instructor, LabAssistant, Student FROM accountlevel WHERE Userid = $currentID";
-	$data = mysql_query($query, $link);
-		while($results = mysql_fetch_assoc($data)) 
+	$query2 = "SELECT Administrator, Instructor, LabAssistant, Student FROM AccountLevel WHERE Userid = $currentID";
+	$data2 = mysql_query($query2, $link);
+		while($results = mysql_fetch_assoc($data2)) 
 		{
 			$Administrator = $results["Administrator"];
 			$Instructor = $results["Instructor"];
@@ -53,7 +58,7 @@
 			$Student = $results["Student"];			
 		}
 		
-		mysql_free_result($data);		
+		mysql_free_result($data2);		
 ?>
 
 <div class="row-fluid">
@@ -162,7 +167,7 @@ echo "
             </thead>
             <tbody>
 	 ";
-		$query = "SELECT courses.name, courses.section, courses.Room, UserAccounts.Fname, UserAccounts.Lname FROM UserAccounts,usercourses,courses WHERE UserID = $currentID and InstructorID = UserAccounts.id and usercourses.CourseID = courses.CourseID";
+		$query = "SELECT Courses.name, Courses.section, Courses.Room, UserAccounts.Fname, UserAccounts.Lname FROM UserAccounts,UserCourses,Courses WHERE UserID = $currentID and InstructorID = UserAccounts.id and UserCourses.CourseID = Courses.CourseID";
 		$data = mysql_query($query, $link);
 		while($results = mysql_fetch_assoc($data)) 
 		{
@@ -213,7 +218,7 @@ echo "
             </thead>
             <tbody>
 	 ";
-		$query = "SELECT courses.name, courses.section, courses.Room, UserAccounts.Fname, UserAccounts.Lname FROM UserAccounts, courses WHERE courses.InstructorID = $currentID and id = InstructorID";
+		$query = "SELECT Courses.name, Courses.section, Courses.Room, UserAccounts.Fname, UserAccounts.Lname FROM UserAccounts, Courses WHERE Courses.InstructorID = $currentID and id = InstructorID";
 		$data = mysql_query($query, $link);
 		while($results = mysql_fetch_assoc($data)) 
 		{
@@ -264,7 +269,7 @@ echo "
             </thead>
             <tbody>
 	 ";
-		$query = "Select Fname, Lname, name, section, Room, Active from UserAccounts,usercourses, courses where usercourses.CourseID = courses.CourseID and id = UserID and InstructorID = $currentID;";
+		$query = "Select Fname, Lname, name, section, Room, Active from UserAccounts,UserCourses, Courses where UserCourses.CourseID = Courses.CourseID and id = UserID and InstructorID = $currentID;";
 		$data = mysql_query($query, $link);
 		while($results = mysql_fetch_assoc($data)) 
 		{
