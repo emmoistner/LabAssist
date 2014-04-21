@@ -26,7 +26,7 @@ if(isset($_SESSION['Fname']) && isset($_POST['courses'])){
     $courseIDSql = "Select CourseID from Courses where Name ='" . $className . "' and Section =" . $section;
     $courseIDResult = mysql_query($courseIDSql, $link);
     $courseIDArray = mysql_fetch_array($courseIDResult, MYSQL_ASSOC);
-    $courseID = $courseIDArray['courseID'];
+    $courseID = $courseIDArray['CourseID'];
     $clockInSql = "Insert into TimeClock (UserID, IP, TimeIn, CourseID) values(". $userID. ", INET_ATON('".$ip. "'), CURRENT_TIMESTAMP, ". $courseID . ")";
     mysql_query($clockInSql, $link);
     $activeSql = "Update UserAccounts set Active =1 where id=" . $userID;
