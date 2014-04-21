@@ -41,10 +41,11 @@
        </br>
           <h4 class="modal-title" id="myModalLabel">Create A New Class</h4>  
        <div class="modal-header"> 
-         <input type ="text" class="input-small" placeholder = "Class Name" name ="classname" id="classname"required="true"/> 
-         <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor" id="instructor"required/> 
-         <input type ="text" class="input-small" placeholder = "Section" name="section" id="section" required/> 
-         <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum" id="roomnum" required/>  
+         <input type ="text" class="input-small" placeholder = "Class Name" name ="classname" id="classname" required="true"/> 
+         <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor" id="instructor"required="true"/> 
+         <input type ="text" class="input-small" placeholder = "Section" name="section" id="section" required="true"/> 
+         <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum" id="roomnum" required="true"/>  
+         <input type ="text" class="input-small" placeholder = "Semester" name ="sem" id="semester" required="true"/>
          </br>
        </div>
          <p align = "right">
@@ -64,10 +65,11 @@
           <h4 class="modal-title" id="myModalLabel">Create the Class</h4> 
         </br>
           <form action ="ImportCSV.php" method="post"> 
-         <input type ="text" class="input-small" placeholder = "Class Name" name ="classname2" required="required"/> 
-         <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor2" required="required"/> 
-         <input type ="text" class="input-small" placeholder = "Section" name ="section2" required="required"/> 
-         <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum2" required="required"/> 
+         <input type ="text" class="input-small" placeholder = "Class Name" name ="classname2" required="true"/> 
+         <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor2" required="true"/> 
+         <input type ="text" class="input-small" placeholder = "Section" name ="section2" required="true"/> 
+         <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum2" required="true"/> 
+         <input type ="text" class="input-small" placeholder = "Semester" name="sem2" required="true"/>
        <div class ="modal-bodynew">
         </br>
         <h4 class="modal-title" id="myModalLabel1">Import Student List</h4> 
