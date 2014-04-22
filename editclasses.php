@@ -10,6 +10,10 @@ require('files.php');
   header("location:index.php");
 }
 ?>
+<script src="dist/js/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
+<script src="dist/js/dataTables.tableTools.js"></script>
+<script src="dist/js/DT_bootstrap.js"></script>
+<link href="dist/css/DT_bootstrap.css" rel="stylesheet">
 <script>
 $(document).ready(function() {
     $('table').dataTable();
@@ -21,10 +25,10 @@ $(document).ready(function() {
 
 <?php
 $id = $_SESSION['ID'];
-$query = "Select Name, CourseID, Section from Courses where InstructorID=". $id;
+$query = "Select Name, CourseID, Section, Semester from Courses where InstructorID=". $id;
 $response = mysql_query($query, $link);
 while($results = mysql_fetch_array($response)) {
-	echo '<div class="container"><div class="row-fluid"><h4 class="modal-title">'.$results['Name'].' Section '.$results['Section'].'</h4></div>
+	echo '<div class="container"><div class="row-fluid"><h4 class="modal-title">'.$results['Name'].' Section '.$results['Section'].' '.$results['Semester'].'</h4></div>
 	<div class="row-fluid">';
 	$courseID = $results['CourseID'];
 	$query2 = "Select UserCourses.UserID, UserAccounts.Uname, UserAccounts.Fname, UserAccounts.Lname from UserCourses, UserAccounts where UserCourses.CourseID=".$courseID." and UserAccounts.id = UserCourses.UserID";
@@ -46,6 +50,7 @@ while($results = mysql_fetch_array($response)) {
          echo '</tbody>  	
   		</table>
   		</div>
+      </br>
   		<form action ="classadd.php?courseid='.$courseID.'" id="inform" method="post">
   		<table<tr><th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Student ID" name ="ID" required="required"/></div></th>
       <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Username" name ="Uname" required="required"/></div></th>

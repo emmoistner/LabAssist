@@ -30,13 +30,13 @@ $(document).ready(function() {
    		<table cellpadding='0' cellspacing='0' border='0' class='table table-hover table-bordered' id='example'>
         	<thead>
             	<tr>
-            	<th>Student Name</th><th>IP</th> <th>Class</th> <th>Section</th> <th>Time In</th><th>Time Out</th><th>Time in Lab</th>
+            	<th>Student Name</th><th>IP</th> <th>Class</th> <th>Section</th><th>Semester</th> <th>Time In</th><th>Time Out</th><th>Time in Lab</th>
            		</tr>
             </thead>
             <tbody>
    <?php
    
-   $query= "Select Courses.CourseID, Courses.Name, Courses.Section, TimeClock.UserID, TimeClock.TimeIn, TimeClock.TimeOut, TimeDiff(TimeClock.TimeOut, TimeClock.TimeIn) as TimeDiff, INET_NTOA(TimeClock.IP) as IP, UserAccounts.Fname, UserAccounts.Lname from
+   $query= "Select Courses.CourseID, Courses.Name, Courses.Section, Courses.Semester, TimeClock.UserID, TimeClock.TimeIn, TimeClock.TimeOut, TimeDiff(TimeClock.TimeOut, TimeClock.TimeIn) as TimeDiff, INET_NTOA(TimeClock.IP) as IP, UserAccounts.Fname, UserAccounts.Lname from
 	Courses, TimeClock, UserAccounts where Courses.InstructorID=".$_SESSION['ID']." and TimeClock.CourseID=Courses.CourseID and UserAccounts.id = TimeClock.UserID";
 	$data = mysql_query($query, $link);
 	 while($results = mysql_fetch_array($data, MYSQL_ASSOC)) {
@@ -50,7 +50,7 @@ $(document).ready(function() {
 	 	$finalTimeOut = date_format($dateTimeOut, "l F j, Y g:i A");
 
 	 	echo "<tr>
-	 			<th>".$results['Fname'].' '.$results['Lname']."</th><th>".$results['IP']."</th><th>".$results['Name']."</th><th>".$results['Section']."</th><th>".$finalTimeIn."</th><th>".$finalTimeOut."</th><th>".$results['TimeDiff']."</th>
+	 			<th>".$results['Fname'].' '.$results['Lname']."</th><th>".$results['IP']."</th><th>".$results['Name']."</th><th>".$results['Section']."</th><th>".$results['Semester']."</th><th>".$finalTimeIn."</th><th>".$finalTimeOut."</th><th>".$results['TimeDiff']."</th>
 	 			</tr>";
 	 }
    ?>

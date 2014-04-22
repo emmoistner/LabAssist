@@ -35,7 +35,7 @@
             </div>
           </br>
              <div class="row-fluid">
-         <div class="span2 offset5"><input type ="text" class="form-control" placeholder = "Lname" name ="Lname" required="required" maxlength="32"/></div> 
+         <div class="span2 offset5"><input type ="text" class="form-control" placeholder = "Last Name" name ="Lname" required="required" maxlength="32"/></div> 
             </div>
             </br>
             <div class="row-fluid">
