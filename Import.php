@@ -45,7 +45,7 @@
          <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor" id="instructor"required="true"/> 
          <input type ="text" class="input-small" placeholder = "Section" name="section" id="section" required="true"/> 
          <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum" id="roomnum" required="true"/>  
-         <input type ="text" class="input-small" placeholder = "Semester" name ="sem" id="semester" required="true"/>
+         <input type ="text" class="input-small" placeholder = "Semester" name ="sem" id="sem" required="true"/>
          </br>
        </div>
          <p align = "right">

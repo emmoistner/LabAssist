@@ -74,21 +74,21 @@ $(document).ready(function(){
       aoColumns: [
       {
 
-        sName: "Lname"
+        sName: "LastName"
       },
 
       {
 
-        sName: "Fname"
+        sName: "FirstName"
       },
 
       {
-        sName: "Uname"
+        sName: "Username"
 
       },
 
       {
-        sName: "id"
+        sName: "StudentID"
       }
 
 
