@@ -18,9 +18,9 @@ $name = mysql_real_escape_string($_POST['classname']);
 $section = mysql_real_escape_string($_POST['section']);
 $instructor = mysql_real_escape_string($_POST['instructor']);
 $room = mysql_real_escape_string($_POST['roomnum']);
-$semester = mysql_real_escape_string($_POST['sem'])
+$semester = mysql_real_escape_string($_POST['sem']);
 
-$sql = "INSERT INTO Courses (id, Name, Section, InstructorID, Room, Semester) Values (NULL, '". $name ."', '". $section ."', '". $instructor ."', '". $room ."', '". $semester ."' )";
+$sql = "INSERT INTO Courses (CourseID, Name, Section, InstructorID, Room, Semester) Values (NULL, '". $name ."', '". $section ."', '". $instructor ."', '". $room ."', '". $semester ."' )";
 
 $query = mysql_query($sql);
 
@@ -42,19 +42,19 @@ $(document).ready(function(){
   $('#table').dataTable({
       aoColumns: [
       {
-        sName: "Lname"
+        sName: "LastName"
       },
 
       {
-        sName: "Fname"
+        sName: "FirstName"
       },
 
       {
-        sName: "Uname"
+        sName: "Username"
       },
 
       {
-        sName: "id"
+        sName: "StudentID"
       }
       ]
      }).makeEditable({
@@ -65,49 +65,47 @@ $(document).ready(function(){
 
   });
 
+
 function fnClickAddRow(){
+  $('#table').dataTable().fnAddData([
+    "Last Name",
+    "First Name",
+    "Username",
+    "Student ID"
 
 
-var table = $('#table').dataTable();
+    ]);
 
-  table.fnAddData( [
-    'Last Name',
-    'First Name',
-    'Username',
-    'Student ID' ]
-  );
 
-  table.makeEditable({
-
+  $('#table').dataTable().makeEditable({
 
     sUpdateURL: "UpdateData.php"
+
   });
+
 
 
 }
 
 function fnClickDeleteRow(){
-
-var table2 = $('#table').dataTable();
-  table2.fnDeleteRow(0);
-
-  table2.makeEditable({
+$('#table').dataTable().fnDeleteRow(0);
 
 
-
-    sUpdateURL: "UpdateData.php"
-  });
 
 
 
 }
 
 
+
+
+
+
 </script>
 <div class= "container">
 <div class="add_delete_toolbar" >
-  <button id="new" onclick="fnClickAddRow()">Add Student</button>
-  <button id="delete" onclick="fnClickDeleteRow()">Delete Student</button>
+  <button id="btnAddNewRow" onclick="fnClickAddRow()">Add Student</button>
+  <button id="btnDeleteRow" onclick="fnClickDeleteRow()">Delete Student</button>
 
 </div>
    <table cellpadding='0' cellspacing='0' border='0' class='table table-hover table-bordered' id='table'>
