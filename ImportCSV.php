@@ -54,6 +54,14 @@ $courseID = "ALTER TABLE temp ADD CourseID VARCHAR(60) AFTER Availability";
 
 mysql_query($courseID);
 
+$accountLvl = "ALTER TABLE temp ADD AccountLevel INTEGER(1) AFTER CourseID";
+
+mysql_query($accountLvl);
+
+$insertAccountlvl = "UPDATE temp SET AccountLevel = 1";
+
+mysql_query($insertAccountlvl);
+
 $insertCourseID = "UPDATE temp SET CourseID = ". $lastInsert ."";
 
 mysql_query($insertCourseID);

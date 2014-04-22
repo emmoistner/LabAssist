@@ -16,13 +16,13 @@
 
 
 
-$temp = "SELECT StudentID, Username, FirstName, LastName, StudentID FROM temp";
-
-$result = mysql_query($temp, $link);
-
-$query = "INSERT INTO UserAccounts (id, Uname, Fname, Lname, Pass) SELECT StudentID, Username, FirstName, LastName, StudentID FROM temp ON DUPLICATE KEY IGNORE UserAccounts.id = temp.StudentID";
+$query = "INSERT IGNORE INTO UserAccounts (id, Uname, Fname, Lname, Pass) SELECT StudentID, Username, FirstName, LastName, StudentID FROM temp";
 
 mysql_query($query, $link);
+
+$account = "INSERT IGNORE INTO AccountLevel (UserID, Student) SELECT StudentID, AccountLevel FROM temp";
+
+mysql_query($account, $link);
 
 $connect = "INSERT INTO UserCourses (UserID, CourseID) SELECT StudentID, CourseID FROM temp";
 
