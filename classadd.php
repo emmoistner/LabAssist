@@ -16,7 +16,7 @@ $courseID = $_GET['courseid'];
 
 
 
- $query = 'insert INTO UserAccounts (id, Uname, Fname, Lname, Pass, Active) values('.$id.', "'.$uname.'", "'.$fname.'", "'.$lname.'", '.$id.', 0)';
+ $query = 'insert INTO UserAccounts (id, Uname, Fname, Lname, Pass, Active) values('.$id.', "'.$uname.'", "'.$fname.'", "'.$lname.'", "'.sha1($id).'", 0)';
  $query3 = 'Insert into AccountLevel values('.$id.', 1, 0, 0, 0)';
  mysql_query($query, $link);
 

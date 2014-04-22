@@ -4,7 +4,7 @@ require('connect.php');
 
 
 $myusername=$_POST['username']; 
-$mypassword=$_POST['password']; 
+$mypassword=sha1($_POST['password']); 
 
 /*$myusername = stripslashes($myusername);
 $mypassword = stripslashes($mypassword);

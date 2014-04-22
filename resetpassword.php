@@ -8,7 +8,7 @@ else {
 	require('connect.php');
 	$id = $_GET['id'];
 
-	$query= "Update UserAccounts set Pass=".$id." where id=".$id;
+	$query= "Update UserAccounts set Pass='".sha1($id)."' where id=".$id;
 	mysql_query($query, $link);
 
 }

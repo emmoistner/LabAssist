@@ -16,7 +16,7 @@
 
 
 
-$query = "INSERT IGNORE INTO UserAccounts (id, Uname, Fname, Lname, Pass) SELECT StudentID, Username, FirstName, LastName, StudentID FROM temp";
+$query = "INSERT IGNORE INTO UserAccounts (id, Uname, Fname, Lname, Pass) SELECT StudentID, Username, FirstName, LastName, SHA1(StudentID) FROM temp";
 
 mysql_query($query, $link);
 

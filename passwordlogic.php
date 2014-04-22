@@ -21,8 +21,8 @@
      $response = mysql_query($query, $link);
      $results = mysql_fetch_array($response);
      $pass = $results['Pass'];
-     if($pass == $currentPass) {
-      $query2 = "Update UserAccounts set Pass ='".$newPass."' where id = ".$id; 
+     if($pass == sha1($currentPass)) {
+      $query2 = "Update UserAccounts set Pass ='".sha1($newPass)."' where id = ".$id; 
       mysql_query($query2, $link);
         echo '<div class = "alert alert-success">Password changed.</div>';
      }
