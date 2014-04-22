@@ -2,7 +2,7 @@
 <head>
 
 <?php
-require('files.php');
+  require('files.php');
   require ('includeJS.php');
   require('nav.php');
   require('connect.php');
@@ -19,12 +19,13 @@ $(document).ready(function() {
     $('#example').dataTable();
 } );
 </script>
+<title>LabTrack - Edit Users</title>
 </head><body>
 <div class="container">
 <table cellpadding='0' cellspacing='0' border='0' class='table table-hover table-bordered' id='example'>
         	<thead>
             	<tr>
-            	<th>ID</th><th>Username</th> <th>First Name</th> <th>Last Name</th><th>Edit User</th><th>Remove Student</th>
+            	<th>ID</th><th>Username</th> <th>First Name</th> <th>Last Name</th><th>Edit User</th><th>Remove User</th>
            		</tr>
             </thead>
             <tbody>
@@ -52,11 +53,11 @@ while($answer = mysql_fetch_array($response)) {
 ?>
 </tbody></thead></table></br>
 <form action ="useradd.php" id="inform" method="post">
-  		<table<tr><th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Student ID" name ="ID" required="required"/></div></th>
-      <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Username" name ="Uname" required="required"/></div></th>
-      <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "First Name" name ="Fname" required="required"/></div></th>
-      <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Last Name" name ="Lname" required="required"/></div></th>
-  		<th><button type="submit" class="btn btn-primary" data-dismiss="modal">Add New Student</button></th></tr></div></form>
+  		<table<tr><th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Student ID" name ="ID" required/></div></th>
+      <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Username" name ="Uname" required/></div></th>
+      <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "First Name" name ="Fname" required/></div></th>
+      <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Last Name" name ="Lname" required/></div></th>
+  		<th><button type="submit" class="btn btn-primary" data-dismiss="modal">Add New User</button></th></tr></div></form>
   		</div>
 
 </body></html>

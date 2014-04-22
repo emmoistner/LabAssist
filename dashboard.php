@@ -84,6 +84,7 @@ echo "
       <div class='panel-body'>
         <h4><a href='carousel.php'>Banner Customization</a></h4>
         <h4><a href='editusers.php'>Edit/Add Users</a></h4>
+		<h4><a href='createinstructor.php'>Add Instructors</a></h4>
       </div>
     </div>
   </div>
