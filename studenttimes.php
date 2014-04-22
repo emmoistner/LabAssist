@@ -12,6 +12,7 @@
    if(!isset($_SESSION['Fname']) || $_SESSION['Instructor']==0) {
   header("location:index.php");
 }
+  $courseID = $_GET['id'];
   ?>
 
 <script src="dist/js/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
@@ -36,8 +37,8 @@ $(document).ready(function() {
             <tbody>
    <?php
    
-   $query= "Select Courses.CourseID, Courses.Name, Courses.Section, Courses.Semester, TimeClock.UserID, TimeClock.TimeIn, TimeClock.TimeOut, TimeDiff(TimeClock.TimeOut, TimeClock.TimeIn) as TimeDiff, INET_NTOA(TimeClock.IP) as IP, UserAccounts.Fname, UserAccounts.Lname from
-	Courses, TimeClock, UserAccounts where Courses.InstructorID=".$_SESSION['ID']." and TimeClock.CourseID=Courses.CourseID and UserAccounts.id = TimeClock.UserID";
+   $query= "Select Courses.Name, Courses.Section, Courses.Semester, TimeClock.UserID, TimeClock.TimeIn, TimeClock.TimeOut, TimeDiff(TimeClock.TimeOut, TimeClock.TimeIn) as TimeDiff, INET_NTOA(TimeClock.IP) as IP, UserAccounts.Fname, UserAccounts.Lname from
+	Courses, TimeClock, UserAccounts where Courses.InstructorID=".$_SESSION['ID']." and Courses.CourseID=".$courseID." and TimeClock.CourseID=".$courseID." and UserAccounts.id = TimeClock.UserID";
 	$data = mysql_query($query, $link);
 	 while($results = mysql_fetch_array($data, MYSQL_ASSOC)) {
 

@@ -19,7 +19,7 @@
 	require 'breadcrumbs.php';
 	include "connect.php";
 	$currentID = $_SESSION['ID'];
-	$queryAccountLevel = "SELECT Administrator, Instructor, LabAssistant, Student FROM AccountLevel WHERE Userid = $currentID";
+	$queryAccountLevel = "SELECT Administrator, Instructor, LabAssistant, Student FROM AccountLevel WHERE UserID = $currentID";
 	$dataAccountLevel = mysql_query($queryAccountLevel, $link);
 		while($resultsLevel = mysql_fetch_assoc($dataAccountLevel)) 
 		{
@@ -39,13 +39,15 @@
       </div>
       <div class="panel-body">
         <?PHP
-		$query = "SELECT Courses.name, Courses.section FROM UserAccounts,UserCourses,Courses WHERE UserID = $currentID and InstructorID = UserAccounts.id and UserCourses.CourseID = Courses.CourseID";
+		$query = "SELECT Name, CourseID, Section, Semester FROM Courses where InstructorID = $currentID";
 		$data = mysql_query($query, $link);
 		while($results = mysql_fetch_assoc($data)) 
 		{
-			$Coursename = $results["name"];
-			$Sectionnumber = $results["section"];
-			echo "<h5> $Coursename"." "."$Sectionnumber </h5>";
+      $courseID = $results['CourseID'];
+			$Coursename = $results["Name"];
+			$Sectionnumber = $results["Section"];
+      $semester = $results['Semester'];
+			echo '<a href="studenttimes.php?id='.$courseID.'"><h5> '.$Coursename.' Section '.$Sectionnumber.' '.$semester.' </h5><a>';
 		}
 		
 		?>
