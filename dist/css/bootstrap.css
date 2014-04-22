@@ -3161,43 +3161,43 @@ input[type="button"].btn-block {
 }
 
 .glyphicon-briefcase:before {
-  content: "\1f4bc";
+  content: "\e139";
 }
 
 .glyphicon-calendar:before {
-  content: "\1f4c5";
+  content: "\e109";
 }
 
 .glyphicon-pushpin:before {
-  content: "\1f4cc";
+  content: "\e146";
 }
 
 .glyphicon-paperclip:before {
-  content: "\1f4ce";
+  content: "\e142";
 }
 
 .glyphicon-camera:before {
-  content: "\1f4f7";
+  content: "\e046";
 }
 
 .glyphicon-lock:before {
-  content: "\1f512";
+  content: "\e033";
 }
 
 .glyphicon-bell:before {
-  content: "\1f514";
+  content: "\e123";
 }
 
 .glyphicon-bookmark:before {
-  content: "\1f516";
+  content: "\e044";
 }
 
 .glyphicon-fire:before {
-  content: "\1f525";
+  content: "\e104";
 }
 
 .glyphicon-wrench:before {
-  content: "\1f527";
+  content: "\e136";
 }
 
 .caret {

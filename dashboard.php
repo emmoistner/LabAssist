@@ -82,8 +82,8 @@ echo "
         <h3 class='panel-title'><span class='glyphicon glyphicon-wrench'></span> Admin Tools </h3>
       </div>
       <div class='panel-body'>
-        <h5><a href='carousel.php'>Banner Customization</a></h5>
-        <h5><a href='editusers.php'>Edit/Add Users</a></h5>
+        <h4><a href='carousel.php'>Banner Customization</a></h4>
+        <h4><a href='editusers.php'>Edit/Add Users</a></h4>
       </div>
     </div>
   </div>
