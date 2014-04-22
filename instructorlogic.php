@@ -17,7 +17,7 @@
      $url = $_POST['url'];
      $bio = $_POST['Bio'];
      require('connect.php');
-     $query = 'Insert into UserAccounts values('.$ID.', "'.$uname.'", "'.$fname.'", null, "'.$lname.'", '.$ID.', 0)';
+     $query = 'Insert into UserAccounts values('.$ID.', "'.$uname.'", "'.$fname.'", null, "'.$lname.'", '.sha1($ID).', 0)';
      mysql_query($query, $link);
      $query2 = 'Insert into InstructorBio values('.$ID.', "'.$bio.'", "Nothing Yet", "'.$url.'", "img/'.$filename.'")';
      mysql_query($query2, $link);
