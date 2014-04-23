@@ -36,7 +36,7 @@
      <h1>Classes</h1>
        </br> 
        </br> 
-       <form action="ImportClassList.php"method="post" name="createClass">
+       <form action="createClass.php"method="post" name="createClass">
          
           <h3 class="modal-title" id="myModalLabel">Create A New Class</h3>  
        <div class="modal-header"> 
