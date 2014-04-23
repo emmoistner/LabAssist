@@ -36,13 +36,11 @@
      <h1>Classes</h1>
        </br> 
        </br> 
-       <form action="ImportClassList.php"method="post">
-         <h3 class="modal-title" id="myModalLabel">Create a New Class List</h3>
-       </br>
-          <h4 class="modal-title" id="myModalLabel">Create A New Class</h4>  
+       <form action="ImportClassList.php"method="post" name="createClass">
+         
+          <h3 class="modal-title" id="myModalLabel">Create A New Class</h3>  
        <div class="modal-header"> 
-         <input type ="text" class="input-small" placeholder = "Class Name" name ="classname" id="classname" required="true"/> 
-         <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor" id="instructor"required="true"/> 
+         <input type ="text" class="input-small" placeholder = "Course Number" name ="classname" id="classname" required="true"/> 
          <input type ="text" class="input-small" placeholder = "Section" name="section" id="section" required="true"/> 
          <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum" id="roomnum" required="true"/>  
          <input type ="text" class="input-small" placeholder = "Semester" name ="sem" id="sem" required="true"/>
@@ -50,7 +48,7 @@
        </div>
          <p align = "right">
         <button type="reset" class="btn btn-default" data-dismiss="modal">Clear</button> 
-        <button type = "submit" name="submit" class = "btn btn-primary" data-dismiss="modal">Create</button> 
+        <button type = "submit" name="submit" class = "btn btn-primary" data-dismiss="modal" onSubmit="validateInteger()">Create</button> 
       </p>
        
      </form>
@@ -64,9 +62,8 @@
          </div>
           <h4 class="modal-title" id="myModalLabel">Create the Class</h4> 
         </br>
-          <form action ="ImportCSV.php" method="post"> 
-         <input type ="text" class="input-small" placeholder = "Class Name" name ="classname2" required="true"/> 
-         <input type ="text" class="input-small" placeholder = "Instructor" name ="instructor2" required="true"/> 
+          <form action ="ImportCSV.php" method="post" name="importClass"> 
+         <input type ="text" class="input-small" placeholder = "Course Number" name ="classname2" required="true"/> 
          <input type ="text" class="input-small" placeholder = "Section" name ="section2" required="true"/> 
          <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum2" required="true"/> 
          <input type ="text" class="input-small" placeholder = "Semester" name="sem2" required="true"/>
@@ -76,7 +73,7 @@
        <input type="file" id="the_file" required="required" accept=".csv" class="filestyle" data-classButton="btn btn-primary" data-buttonText="Choose a File to Import" name="the_file" /> 
        <p align = "right">
          <button type="reset" class="btn btn-default" data-dismiss="modal">Clear</button> 
-         <button type="submit" class="btn btn-primary" data-dismiss="modal">Create</button> 
+         <button type="submit" class="btn btn-primary" data-dismiss="modal" onSubmit="validateInteger2()">Create</button> 
        </p>
        </div> 
        </form>
@@ -186,26 +183,9 @@ return false;
 
 
  
-$(document).ready(function (){
-    validate();
-    $('#fname, #lname, #email, #userid, #classname, #section, #instructor, #roomnum').change(validate);
-});
 
-function validate(){
-    if ($('#fname').val().length   >   0   &&
-        $('#lname').val().length  >   0   &&
-        $('#email').val().length    >   0 &&
-        $('#userid').val().length > 0 &&
-        $('#classname').val().length > 0 &&
-        $('#section').val().length    >   0 &&
-        $('#instructor').val().length    >   0 &&
-        $('#roomnum').val().length    >   0) {
-        $("input[type=submit]").prop("disabled", false);
-    }
-    else {
-        $("input[type=submit]").prop("disabled", true);
-    }
-}
+
+
 
    
   function removeRow(){
@@ -216,6 +196,40 @@ function validate(){
 
   }
 
+
+function validateInteger(){
+  var strValue = document.createClass.classname.value;
+  var strValue2 = document.createClass.section.value;
+  
+
+  var fValue = parseFloat(strValue);
+  var fValue2 = parseFloat(strValue2);
+  
+
+  if (isNaN(fValue) || isNaN(fValue2)){
+    alert("Please enter an integer for the fields Course Number and Section");
+
+  }
+
+
+}
+
+function validateInteger2(){
+  var strValue = document.importClass.classname2.value;
+  var strValue2 = document.importClass.section2.value;
+  
+
+  var fValue = parseFloat(strValue);
+  var fValue2 = parseFloat(strValue2);
+  
+
+  if (isNaN(fValue) || isNaN(fValue2)){
+    alert("Please enter an integer for the fields Course Number and Section");
+
+  }
+
+
+}
 
   
   
