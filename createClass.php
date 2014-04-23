@@ -20,7 +20,7 @@ $instructor = mysql_real_escape_string($_SESSION['ID']);
 $room = mysql_real_escape_string($_POST['roomnum']);
 $semester = mysql_real_escape_string($_POST['sem']);
 
-$sql = "INSERT INTO Courses (CourseID, Name, Section, InstructorID, Room, Semester) Values (NULL, 'TCMP'+'". $name ."', '". $section ."', '". $instructor ."', '". $room ."', '". $semester ."' )";
+$sql = "INSERT INTO Courses (CourseID, Name, Section, InstructorID, Room, Semester) Values (NULL, 'TCMP+". $name ."', '". $section ."', '". $instructor ."', '". $room ."', '". $semester ."' )";
 
 $query = mysql_query($sql);
 
