@@ -40,7 +40,7 @@
          
           <h3 class="modal-title" id="myModalLabel">Create A New Class</h3>  
        <div class="modal-header"> 
-         <input type ="text" class="input-small" placeholder = "Course Number" name ="classname" id="classname" required="true"/> 
+         TCMP <input type ="text" class="input-small" placeholder = "Course Number" name ="classname" id="classname" required="true"/> 
          <input type ="text" class="input-small" placeholder = "Section" name="section" id="section" required="true"/> 
          <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum" id="roomnum" required="true"/>  
          <input type ="text" class="input-small" placeholder = "Semester" name ="sem" id="sem" required="true"/>
@@ -63,7 +63,7 @@
           <h4 class="modal-title" id="myModalLabel">Create the Class</h4> 
         </br>
           <form action ="ImportCSV.php" method="post" name="importClass"> 
-         <input type ="text" class="input-small" placeholder = "Course Number" name ="classname2" required="true"/> 
+         TCMP <input type ="text" class="input-small" placeholder = "Course Number" name ="classname2" required="true"/> 
          <input type ="text" class="input-small" placeholder = "Section" name ="section2" required="true"/> 
          <input type ="text" class="input-small" placeholder = "Room Number" name ="roomnum2" required="true"/> 
          <input type ="text" class="input-small" placeholder = "Semester" name="sem2" required="true"/>
