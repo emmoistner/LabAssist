@@ -82,7 +82,7 @@ if ($Student == 1){
 			$Coursename = $results['Name'];
 			$Sectionnumber = $results['Section'];
       $semester = $results['Semester'];
-			echo "<a href='studenttimes.php?id=".$courseID."'><h5> ".$Coursename." Section ".$Sectionnumber." ".$semester." </h5></a>";
+			echo "<a href='mytimes.php?id=".$courseID."'><h5> ".$Coursename." Section ".$Sectionnumber." ".$semester." </h5></a>";
 		}
 		
 		echo "
