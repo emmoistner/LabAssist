@@ -43,15 +43,29 @@
              <div class="row-fluid">
          <div class="span2 offset5"><input type ="text" class="form-control" placeholder = "Last Name" value="'.$results['Lname'].'" name ="Lname" required="required" maxlength="32"/></div> 
             </div>
-            </br>
-        <div class="row-fluid">
+            </br>';
+
+                    $query2 = "Select Administrator from AccountLevel where UserID =" .$id;
+
+        $response2 = mysql_query($query2, $link);
+        $results2 = mysql_fetch_array($response2);
+        echo '<div class="row-fluid">';
+        if($results2['Administrator']) {
+               echo '<div class="span2 offset5"><input type="checkbox" name="Active" checked> Administrator</div>';
+             }
+             else {
+              echo '<div class="span2 offset5"><input type="checkbox" name="Active"> Administrator</div>';
+             }
+            
+
+       echo '</div><div class="row-fluid">
           <div class="span2 offset5"><button type="submit" class="btn btn-primary" data-dismiss="modal">Commit Changes</button></div>
         </div> 
         </br>
         <div class="row-fluid">
           <div class="span2 offset5"><a class="btn btn-default" href="resetpassword.php?id='.$id.'">Reset User\'s Password</a></div>
-        </div> 
-      </div>
+        </div>
+        </div>
        </form>';
 
        ?>

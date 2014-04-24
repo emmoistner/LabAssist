@@ -10,11 +10,24 @@ else {
 	$uname = $_POST['Uname'];
 	$lname = $_POST['Lname'];
 	$fname = $_POST['Fname'];
+	$active = $_POST['Active'];
 
 
 	$query= 'Update UserAccounts set Uname="'.$uname.'", Fname="'.$fname.'", Lname="'.$lname.'" where id='.$id;
 
 	mysql_query($query, $link);
+
+	$query2 = "";
+
+	if(isSet($active)) {
+		$query2 = "Update AccountLevel set Administrator = 1 where UserID=".$id;
+
+	}
+	else {
+		$query2 = "Update AccountLevel set Administrator = 0 where UserID=".$id;
+	}
+
+	mysql_query($query2);
 
 }
 ?>
