@@ -12,15 +12,8 @@
 
 $courseID = $_GET['id'];
 ?>
-<script src="dist/js/DataTables-1.9.4/media/js/jquery.dataTables.js"></script>
-<script src="dist/js/dataTables.tableTools.js"></script>
-<script src="dist/js/DT_bootstrap.js"></script>
-<link href="dist/css/DT_bootstrap.css" rel="stylesheet">
-<script>
-$(document).ready(function() {
-    $('#example').dataTable();
-} );
-</script>
+
+
 <title>LabTrack</title>
 </head><body>
 <div class="container">
