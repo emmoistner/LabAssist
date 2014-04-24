@@ -4,7 +4,7 @@
   header("location:index.php");
 }
 else {
-	header("location:editusers.php");
+	header("location:editclasses.php");
 
  require('connect.php');
 

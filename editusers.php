@@ -53,11 +53,11 @@ while($answer = mysql_fetch_array($response)) {
 ?>
 </tbody></thead></table></br>
 <form action ="useradd.php" id="inform" method="post">
-  		<table<tr><th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "BSU ID" name ="ID" required/></div></th>
+  		<table><tr><th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "BSU ID" name ="ID" required/></div></th>
       <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Username" name ="Uname" required/></div></th>
       <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "First Name" name ="Fname" required/></div></th>
       <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Last Name" name ="Lname" required/></div></th>
-  		<th><button type="submit" class="btn btn-primary" data-dismiss="modal">Add New User</button></th></tr></div></form>
+  		<th><button type="submit" class="btn btn-primary" data-dismiss="modal">Create New User</button></th></tr></table></div></form>
   		</div>
 
 </body></html>
