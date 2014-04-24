@@ -31,29 +31,67 @@
 		
 		mysql_free_result($dataAccountLevel);		
 ?>
-<div class="row-fluid">
-  <div class="span4 offset2">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title"><span class="glyphicon glyphicon-bookmark"></span> My Classes </h3>
+<?PHP
+
+if ($Instructor == 1){
+echo "
+<div class='row-fluid'>
+  <div class='span4 offset2'>
+    <div class='panel panel-primary'>
+      <div class='panel-heading'>
+        <h3 class='panel-title'><span class='glyphicon glyphicon-bookmark'></span> My Classes </h3>
       </div>
-      <div class="panel-body">
-        <?PHP
+      <div class='panel-body'>
+	  ";
+      
 		$query = "SELECT Name, CourseID, Section, Semester FROM Courses where InstructorID = $currentID";
 		$data = mysql_query($query, $link);
 		while($results = mysql_fetch_assoc($data)) 
 		{
       $courseID = $results['CourseID'];
-			$Coursename = $results["Name"];
-			$Sectionnumber = $results["Section"];
+			$Coursename = $results['Name'];
+			$Sectionnumber = $results['Section'];
       $semester = $results['Semester'];
-			echo '<a href="studenttimes.php?id='.$courseID.'"><h5> '.$Coursename.' Section '.$Sectionnumber.' '.$semester.' </h5><a>';
+			echo "<a href='studenttimes.php?id=".$courseID."'><h5> ".$Coursename." Section ".$Sectionnumber." ".$semester." </h5><a>";
 		}
 		
-		?>
+		echo "
       </div>
     </div>
   </div>
+  ";
+}
+
+if ($Student == 1){
+	echo "
+<div class='row-fluid'>
+  <div class='span4 offset2'>
+    <div class='panel panel-primary'>
+      <div class='panel-heading'>
+        <h3 class='panel-title'><span class='glyphicon glyphicon-bookmark'></span> My Classes </h3>
+      </div>
+      <div class='panel-body'>
+	  ";
+      
+		$query = "SELECT Name, Courses.CourseID, Section, Semester FROM Courses, UserCourses where UserCourses.UserID = $currentID and UserCourses.CourseID = Courses.CourseID;
+";
+		$data = mysql_query($query, $link);
+		while($results = mysql_fetch_assoc($data)) 
+		{
+      $courseID = $results['CourseID'];
+			$Coursename = $results['Name'];
+			$Sectionnumber = $results['Section'];
+      $semester = $results['Semester'];
+			echo "<a href='studenttimes.php?id=".$courseID."'><h5> ".$Coursename." Section ".$Sectionnumber." ".$semester." </h5><a>";
+		}
+		
+		echo "
+      </div>
+    </div>
+  </div>
+  ";
+}
+    ?>
   <?PHP
   if ($Instructor == 1){
   echo "
