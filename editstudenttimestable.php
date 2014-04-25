@@ -27,27 +27,21 @@ $(document).ready(function(){
       aoColumns: [
       {
 
-        sName: "Fname"
+        sName: null
       },
       {
-        sName: "Lname"
+        sName: null
       },
 
       {
 
-        sName: "IP"
+        sName: null
       },
 
       {
-        sName: "Name"
+        sName: null
       },
 
-      {
-        sName: "Section"
-      },
-      {
-        sName: "Semester"
-      },
       {
         sName: null
       },
@@ -55,7 +49,13 @@ $(document).ready(function(){
         sName: null
       },
       {
-        sName: null
+        sName: "TimeIn"
+      },
+      {
+        sName: "TimeOut"
+      },
+      {
+        sName: "TimeDiff"
       }
 
 

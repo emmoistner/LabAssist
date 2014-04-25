@@ -13,7 +13,7 @@ require('connect.php');
 
   echo $value;
 
-  mysql_query("UPDATE Courses, UserAccounts SET $column = '$value' WHERE id = '$id'");
+  mysql_query("UPDATE TimeClock SET $column = '$value' WHERE id = '$id'");
 
   
 ?>
