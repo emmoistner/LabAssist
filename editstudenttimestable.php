@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+k<!DOCTYPE html>
 <html lang='en'>
 <head>
 <meta charset='utf-8'>
@@ -27,13 +27,37 @@ $(document).ready(function(){
       aoColumns: [
       {
 
-        sName: "TimeIn"
+        sName: "Fname"
+      },
+      {
+        sName: "Lname"
       },
 
       {
 
+        sName: "IP"
+      },
+
+      {
+        sName: "Name"
+      },
+
+      {
+        sName: "Section"
+      },
+      {
+        sName: "Semester"
+      },
+      {
+        sName: "TimeIn"
+      },
+      {
         sName: "TimeOut"
+      },
+      {
+        sName: "TimeDiff"
       }
+
 
       ]
 
@@ -59,7 +83,8 @@ $(document).ready(function(){
 <table cellpadding='0' cellspacing='0' border='0' class='table table-hover table-bordered' id='table'>
   <thead>
     <tr>
-      <th>Student Name</th>
+      <th>First Name</th>
+      <th>Last Name</th>
       <th>IP</th>
       <th>Class</th>
       <th>Section</th>
@@ -84,7 +109,7 @@ $(document).ready(function(){
 	 	$finalTimeOut = date_format($dateTimeOut, "l F j, Y g:i A");
 	
 		echo "<tr>
-	 			<th>".$results['Fname'].' '.$results['Lname']."</th><th>".$results['IP']."</th><th>".$results['Name']."</th><th>".$results['Section']."</th><th>".$results['Semester']."</th><th>".$finalTimeIn."</th><th>".$finalTimeOut."</th><th>".$results['TimeDiff']."</th>
+	 			<th>".$results['Fname']."</th><th>".$results['Lname']."</th><th>".$results['IP']."</th><th>".$results['Name']."</th><th>".$results['Section']."</th><th>".$results['Semester']."</th><th>".$finalTimeIn."</th><th>".$finalTimeOut."</th><th>".$results['TimeDiff']."</th>
 	 			</tr>";
 	
 	
