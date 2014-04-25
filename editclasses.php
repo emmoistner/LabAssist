@@ -52,6 +52,14 @@ while($results = mysql_fetch_array($response)) {
   		</table>
   		</div>
       </br>
+
+      <p>Note: When setting the class name please use the format TCMP000, do not add a space between TCMP and the course number.</p>
+      <form action ="changecourse.php?courseid='.$courseID.'" id="inform" method="post" enctype="multipart/form-data">
+      <table><tr><th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Course Name" value="'.$results['Name'].'" name ="name" required="required"/></div></th>
+      <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Section" name ="section" value="'.$results['Section'].'" required="required"/></div></th>
+      <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Semester" name ="semester" value="'.$results['Semester'].'" required="required"/></div></th>
+      <th><button type="submit" class="btn btn-primary" data-dismiss="modal">Update Class Information</button></th></tr></div></table></form>
+
   		<form action ="classadd.php?courseid='.$courseID.'" id="inform" method="post" enctype="multipart/form-data">
   		<table><tr><th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Student ID" name ="ID" required="required"/></div></th>
       <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Username" name ="Uname" required="required"/></div></th>

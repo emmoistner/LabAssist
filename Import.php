@@ -29,6 +29,9 @@
  require ('includeJS.php');
  require ('files.php');
  require ('connect.php');
+ if(!isset($_SESSION['Fname']) || $_SESSION['Instructor']==0) {
+  header("location:index.php");
+}
 
  ?>
  <body> 

@@ -4,7 +4,7 @@
   header("location:index.php");
 }
 else {
-	header("location:editclasses.php");
+	header("location:" . $_SERVER['HTTP_REFERER']);
 
  require('connect.php');
 
