@@ -108,12 +108,10 @@ $(document).ready(function(){
 	 	$dateTimeOut = DateTime::createFromFormat("Y-m-d H:i:s", $timeOut);
 	 	$finalTimeOut = date_format($dateTimeOut, "l F j, Y g:i A");
 	
-		echo "<tr id = ";
-    <?=$row['id']; ?>
-    <?PHP
-    echo ">
+		echo "
     
     
+    <tr id = ".$results['id']."</tr>
 	 			<td>".$results['Fname']."</td><td>".$results['Lname']."</td><td>".$results['IP']."</td><td>".$results['Name']."</td><td>".$results['Section']."</td><td>".$results['Semester']."</td><td>".$finalTimeIn."</td><td>".$finalTimeOut."</td><td>".$results['TimeDiff']."</td>
 	 			</tr>";
 	
