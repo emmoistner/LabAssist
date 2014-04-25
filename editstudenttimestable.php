@@ -49,13 +49,13 @@ $(document).ready(function(){
         sName: "Semester"
       },
       {
-        sName: "TimeIn"
+        sName: null
       },
       {
-        sName: "TimeOut"
+        sName: null
       },
       {
-        sName: "TimeDiff"
+        sName: null
       }
 
 
@@ -64,7 +64,7 @@ $(document).ready(function(){
 
      }).makeEditable({
 
-      sUpdateURL: "#"
+      sUpdateURL: "UpdateESTT.php"
 
      });
 });
@@ -96,7 +96,7 @@ $(document).ready(function(){
   </thead>
   <tbody>
   <?PHP 
-  $query= "Select Courses.Name, Courses.Section, Courses.Semester, TimeClock.UserID, TimeClock.TimeIn, TimeClock.TimeOut, TimeDiff(TimeClock.TimeOut, TimeClock.TimeIn) as TimeDiff, INET_NTOA(TimeClock.IP) as IP, UserAccounts.Fname, UserAccounts.Lname from UserAccounts, Courses, UserCourses, TimeClock where UserAccounts.id = TimeClock.UserID and UserAccounts.id = UserCourses.UserID and Courses.CourseID = UserCourses.CourseID and Courses.InstructorID = $currentID and UserAccounts.id = $selecteStudent";
+  $query= "Select UserAccounts.id, Courses.Name, Courses.Section, Courses.Semester, TimeClock.UserID, TimeClock.TimeIn, TimeClock.TimeOut, TimeDiff(TimeClock.TimeOut, TimeClock.TimeIn) as TimeDiff, INET_NTOA(TimeClock.IP) as IP, UserAccounts.Fname, UserAccounts.Lname from UserAccounts, Courses, UserCourses, TimeClock where UserAccounts.id = TimeClock.UserID and UserAccounts.id = UserCourses.UserID and Courses.CourseID = UserCourses.CourseID and Courses.InstructorID = $currentID and UserAccounts.id = $selecteStudent";
 	$data = mysql_query($query, $link);
 	 while($results = mysql_fetch_array($data, MYSQL_ASSOC)) {
 
@@ -108,8 +108,13 @@ $(document).ready(function(){
 	 	$dateTimeOut = DateTime::createFromFormat("Y-m-d H:i:s", $timeOut);
 	 	$finalTimeOut = date_format($dateTimeOut, "l F j, Y g:i A");
 	
-		echo "<tr>
-	 			<th>".$results['Fname']."</th><th>".$results['Lname']."</th><th>".$results['IP']."</th><th>".$results['Name']."</th><th>".$results['Section']."</th><th>".$results['Semester']."</th><th>".$finalTimeIn."</th><th>".$finalTimeOut."</th><th>".$results['TimeDiff']."</th>
+		echo "<tr id = ";
+    <?=$row['id']; ?>
+    <?PHP
+    echo ">
+    
+    
+	 			<td>".$results['Fname']."</td><td>".$results['Lname']."</td><td>".$results['IP']."</td><td>".$results['Name']."</td><td>".$results['Section']."</td><td>".$results['Semester']."</td><td>".$finalTimeIn."</td><td>".$finalTimeOut."</td><td>".$results['TimeDiff']."</td>
 	 			</tr>";
 	
 	
