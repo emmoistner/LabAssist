@@ -24,49 +24,53 @@ $(document).ready(function() {
 <body>
 
 <?php
-
 $id = $_SESSION['ID'];
-$query = "Select Name, CourseID, Section, Semester from Courses where InstructorID=". $id ." ORDER BY CourseID DESC";
+$query = "Select Name, CourseID, Section, Semester from Courses where InstructorID=". $id;
 $response = mysql_query($query, $link);
 while($results = mysql_fetch_array($response)) {
-	echo '<div class="container"><div class="row-fluid"><h4 class="modal-title">'.$results['Name'].' Section '.$results['Section'].' '.$results['Semester'].'</h4></div>
-	<div class="row-fluid">';
-	$courseID = $results['CourseID'];
-	$query2 = "Select UserCourses.UserID, UserAccounts.Uname, UserAccounts.Fname, UserAccounts.Lname from UserCourses, UserAccounts where UserCourses.CourseID=".$courseID." and UserAccounts.id = UserCourses.UserID";
-	$response2 = mysql_query($query2, $link);
-	echo "<table cellpadding='0' cellspacing='0' border='0' class='table table-hover table-bordered' id='example'>
-        	<thead>
-            	<tr>
-            	<th>ID</th><th>Username</th> <th>First Name</th> <th>Last Name</th><th>Remove</th>
-           		</tr>
+  echo '<div class="container"><div class="row-fluid"><h4 class="modal-title">'.$results['Name'].' Section '.$results['Section'].' '.$results['Semester'].'</h4></div>
+  <div class="row-fluid">';
+  $courseID = $results['CourseID'];
+  $query2 = "Select UserCourses.UserID, UserAccounts.Uname, UserAccounts.Fname, UserAccounts.Lname from UserCourses, UserAccounts where UserCourses.CourseID=".$courseID." and UserAccounts.id = UserCourses.UserID";
+  $response2 = mysql_query($query2, $link);
+  echo "<table cellpadding='0' cellspacing='0' border='0' class='table table-hover table-bordered' id='example'>
+          <thead>
+              <tr>
+              <th>ID</th><th>Username</th> <th>First Name</th> <th>Last Name</th><th>Remove</th>
+              </tr>
             </thead>
             <tbody>";
             while($results2=mysql_fetch_array($response2)) {
-            	echo "<tr>
-	 			<th>".$results2['UserID'].'</th><th>'.$results2['Uname'].'</th><th> '.$results2['Fname']."</th><th>".$results2['Lname']."</th>"; echo '<th><a class="btn btn-danger" href="classdelete.php?courseid='.$courseID.'&userid='.$results2['UserID'].'">
+              echo "<tr>
+        <th>".$results2['UserID'].'</th><th>'.$results2['Uname'].'</th><th> '.$results2['Fname']."</th><th>".$results2['Lname']."</th>"; echo '<th><a class="btn btn-danger" href="classdelete.php?courseid='.$courseID.'&userid='.$results2['UserID'].'">
             <span class="glyphicon glyphicon-remove"></span></a></th>
-	 			</tr>';
+        </tr>';
             }
          
-         echo '</tbody>  	
-  		</table>
-  		</div>
+         echo '</tbody>   
+      </table>
+      </div>
       </br>
 
-      <p>Note: When setting the class name please use the format TCMP000, do not add a space between TCMP and the course number.</p>
+       <p>Note: When setting the class name please use the format TCMP000, do not add a space between TCMP and the course number.</p>
       <form action ="changecourse.php?courseid='.$courseID.'" id="inform" method="post" enctype="multipart/form-data">
-      <table><tr><th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Course Name" value="'.$results['Name'].'" name ="name" required="required"/></div></th>
+      <tr><th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Course Name" value="'.$results['Name'].'" name ="name" required="required"/></div></th>
       <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Section" name ="section" value="'.$results['Section'].'" required="required"/></div></th>
       <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Semester" name ="semester" value="'.$results['Semester'].'" required="required"/></div></th>
-      <th><button type="submit" class="btn btn-primary" data-dismiss="modal">Update Class Information</button></th></tr></div></table></form>
+      <th><button type="submit" class="btn btn-primary" data-dismiss="modal">Update Class Information</button></th></tr></form>
 
-  		<form action ="classadd.php?courseid='.$courseID.'" id="inform" method="post" enctype="multipart/form-data">
-  		<table><tr><th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Student ID" name ="ID" required="required"/></div></th>
+
+
+
+      <form action ="classadd.php?courseid='.$courseID.'" id="inform" method="post">
+      <tr><th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Student ID" name ="ID" required="required"/></div></th>
       <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Username" name ="Uname" required="required"/></div></th>
       <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "First Name" name ="Fname" required="required"/></div></th>
       <th><div class="span2-offset5"><input type ="text" class="form-control" placeholder = "Last Name" name ="Lname" required="required"/></div></th>
-  		<th><button type="submit" class="btn btn-primary" data-dismiss="modal">Create/Add New Student</button></th></tr></div></table></form><div class="span2-offset5"><a href="choosestudents.php?id='.$courseID.'" class="btn btn-primary">Add Existing Students</a></div></div>
-  		</br><hr/>';
+      <th><button type="submit" class="btn btn-primary" data-dismiss="modal">Add New Student</button></th></tr></form>
+      <div class="span2-offset5"><a href="choosestudents.php?id='.$courseID.'" class="btn btn-primary">Add Existing Students</a></div>
+      </div>
+      </br><hr/>';
 }
 
 
