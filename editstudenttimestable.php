@@ -1,4 +1,4 @@
-k<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang='en'>
 <head>
 <meta charset='utf-8'>
@@ -23,50 +23,7 @@ k<!DOCTYPE html>
 <link href="dist/css/DT_bootstrap.css" rel="stylesheet">
 <script>
 $(document).ready(function(){
-     $('#table').dataTable({
-      aoColumns: [
-      {
-
-        sName: null
-      },
-      {
-        sName: null
-      },
-
-      {
-
-        sName: null
-      },
-
-      {
-        sName: null
-      },
-
-      {
-        sName: null
-      },
-      {
-        sName: null
-      },
-      {
-        sName: "TimeIn"
-      },
-      {
-        sName: "TimeOut"
-      },
-      {
-        sName: "TimeDiff"
-      }
-
-
-      ]
-
-
-     }).makeEditable({
-
-      sUpdateURL: "UpdateESTT.php"
-
-     });
+     $('#table').dataTable();
 });
 </script>
 <?PHP
@@ -92,11 +49,20 @@ $(document).ready(function(){
       <th>Time In</th>
       <th>Time Out</th>
       <th>Time in Lab</th>
+      <th>Edit Time</th>
     </tr>
   </thead>
   <tbody>
   <?PHP 
-  $query= "Select UserAccounts.id, Courses.Name, Courses.Section, Courses.Semester, TimeClock.UserID, TimeClock.TimeIn, TimeClock.TimeOut, TimeDiff(TimeClock.TimeOut, TimeClock.TimeIn) as TimeDiff, INET_NTOA(TimeClock.IP) as IP, UserAccounts.Fname, UserAccounts.Lname from UserAccounts, Courses, UserCourses, TimeClock where UserAccounts.id = TimeClock.UserID and UserAccounts.id = UserCourses.UserID and Courses.CourseID = UserCourses.CourseID and Courses.InstructorID = $currentID and UserAccounts.id = $selecteStudent";
+
+  $queryb = "Select CourseID from UserCourses where UserID = $selecteStudent";
+  $datab = mysql_query($queryb, $link);
+
+  while ($resultsb = mysql_fetch_array($datab)) {
+    $courseID = $resultsb['CourseID'];
+  $query= "Select Distinct Courses.Name, Courses.Section, Courses.Semester, TimeClock.StampID, TimeClock.TimeIn, TimeClock.TimeOut, TimeDiff(TimeClock.TimeOut, TimeClock.TimeIn) 
+  as TimeDiff, INET_NTOA(TimeClock.IP) as IP, UserAccounts.Fname, UserAccounts.Lname from UserAccounts, Courses, UserCourses, 
+  TimeClock where Courses.CourseID= $courseID and UserAccounts.id = $selecteStudent and TimeClock.UserID = $selecteStudent and TimeClock.CourseID = $courseID";
 	$data = mysql_query($query, $link);
 	 while($results = mysql_fetch_array($data, MYSQL_ASSOC)) {
 
@@ -108,15 +74,14 @@ $(document).ready(function(){
 	 	$dateTimeOut = DateTime::createFromFormat("Y-m-d H:i:s", $timeOut);
 	 	$finalTimeOut = date_format($dateTimeOut, "l F j, Y g:i A");
 	
-		echo "
-    
-    
-    <tr id = ".$results['id']."</tr>
-	 			<td>".$results['Fname']."</td><td>".$results['Lname']."</td><td>".$results['IP']."</td><td>".$results['Name']."</td><td>".$results['Section']."</td><td>".$results['Semester']."</td><td>".$finalTimeIn."</td><td>".$finalTimeOut."</td><td>".$results['TimeDiff']."</td>
-	 			</tr>";
+		echo '<tr>
+	 			<th>'.$results['Fname'].'</th><th>'.$results['Lname'].'</th><th>'.$results['IP'].'</th><th>'.$results['Name'].'</th><th>'.$results['Section'].'</th><th>'
+        .$results['Semester'].'</th><th>'.$finalTimeIn.'</th><th>'.$finalTimeOut.'</th><th>'.$results['TimeDiff'].'</th><th><a class="btn btn-default" href="changestamp.php?id='.$results['StampID'].'"><span class="glyphicon glyphicon-pencil"></span></a></th>
+	 			</tr>';
 	
 	
 	}
+}
   ?>
   
   
