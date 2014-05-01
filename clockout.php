@@ -1,8 +1,4 @@
-<?php
 
-require ('includeJS.php');
-
-?>
 
 <!DOCTYPE html>
 <html lang='en'>
@@ -16,8 +12,8 @@ require ('includeJS.php');
   <link href='dist/css/bootstrap-responsive.css' rel='stylesheet'>
     <link href='dist/css/bootstrap.css' rel='stylesheet'>
     <link href='dist/css/bootstrap-Override.css' rel='stylesheet'>    
-        <link href='dist/chosen_V1.0.0/chosen.css' rel='stylesheet'> 
-    <link href='dist/chosen_V1.0.0/chosen.min.css' rel='stylesheet'> 
+        <link href='dist/chosen_v1.0.0/chosen.css' rel='stylesheet'> 
+    <link href='dist/chosen_v1.0.0/chosen.min.css' rel='stylesheet'> 
     <link href='dist/css/chosen-Override.css' re='stylesheet'>
 
   </head>
@@ -25,6 +21,9 @@ require ('includeJS.php');
   <body>
 
 
+    <?php
+    require('nav.php');
+    ?>
 
   <script>
   var datetime = null,
@@ -46,9 +45,6 @@ $(document).ready(function(){
   </script>
 
 
-    <?php
-    require('nav.php');
-    ?>
 
 <?php
 
